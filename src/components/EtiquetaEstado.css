@@ -1,0 +1,24 @@
+.etiqueta-estado {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.etiqueta-estado--leido {
+  background-color: #f5f5f5;
+  color: #8B1538;
+  border: 1px solid #8B1538;
+}
+
+.etiqueta-estado--leyendo {
+  background-color: #8B1538;
+  color: white;
+}
+
+.etiqueta-estado--pendiente {
+  background-color: white;
+  color: #8B1538;
+  border: 1px solid #8B1538;
+}
