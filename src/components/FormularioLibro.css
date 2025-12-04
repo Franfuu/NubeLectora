@@ -1,0 +1,47 @@
+.formulario-libro {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+.formulario-libro h2 {
+  color: #8B1538;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.formulario-libro input,
+.formulario-libro select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #d0d0d0;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.formulario-libro input:focus,
+.formulario-libro select:focus {
+  outline: none;
+  border-color: #8B1538;
+}
+
+.formulario-libro button {
+  width: 100%;
+  padding: 12px;
+  background-color: #8B1538;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.2s;
+}
+
+.formulario-libro button:hover {
+  background-color: #6B0F2A;
+}

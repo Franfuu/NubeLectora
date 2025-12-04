@@ -1,0 +1,52 @@
+.detalle-libro {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+.detalle-libro h2 {
+  color: #8B1538;
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.detalle-libro__info {
+  margin-bottom: 20px;
+}
+
+.detalle-libro__campo {
+  margin-bottom: 15px;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.detalle-libro__campo strong {
+  color: #8B1538;
+  font-weight: 500;
+}
+
+.detalle-libro__acciones {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.detalle-libro__boton-volver {
+  padding: 10px 20px;
+  background-color: white;
+  color: #8B1538;
+  border: 1px solid #8B1538;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.detalle-libro__boton-volver:hover {
+  background-color: #f5f5f5;
+}
