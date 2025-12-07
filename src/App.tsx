@@ -4,12 +4,11 @@ import { librosIniciales } from "./data/libros"; // Asumiendo que ya creaste est
 import type { Libro } from "./types/libro";
 
 // Importamos nuestros componentes en español
-import Cabecera from "./components/Header";
+import Header from "./components/Header";
 import ListaLibros from "./components/ListaLibros";
 import DetalleLibro from "./components/DetalleLibro";
 import FormularioLibro from "./components/FormularioLibro";
 import "./App.css";
-import Header from "./components/Header";
 
 function App() {
   // ESTADO COMPARTIDO (Requisito B.2)

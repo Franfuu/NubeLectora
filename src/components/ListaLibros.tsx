@@ -7,7 +7,7 @@ interface PropsLista {
   libros: Libro[];
   alSeleccionarLibro: (libro: Libro) => void;
 }
-
+ 
 function ListaLibros({ libros, alSeleccionarLibro }: PropsLista) {
   return (
     <div className="lista-libros">
