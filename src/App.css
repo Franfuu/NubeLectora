@@ -1,3 +1,47 @@
+/**
+ * ============================================================================
+ * ESTILOS GLOBALES DE LA APLICACIÓN NUBELELECTORA
+ * ============================================================================
+ * 
+ * Este archivo contiene TODOS los estilos de la aplicación.
+ * 
+ * Paleta de colores tema BURDEOS:
+ * - Color principal: Burdeos (#8B1538, #A01D48)
+ * - Fondo: Negro y tonos oscuros (#1a1a1a, #2a2a2a, #3a3a3a)
+ * - Acentos: Degradados de burdeos
+ * - Textos: Blanco (#f0f0f0) y grises claros (#b0b0b0, #d0d0d0)
+ * - Peligro: Rojo oscuro (#c41e3a)
+ * - Éxito: Verde (#4caf50, #45a049)
+ * - Advertencia: Naranja (#ff9800, #f57c00)
+ * 
+ * Estructura del archivo:
+ * 1. Reset y estilos base
+ * 2. Header (encabezado)
+ * 3. Container principal (layout de 3 columnas)
+ * 4. Sidebar formulario (columna izquierda)
+ * 5. Main content (columna central)
+ * 6. Estadísticas
+ * 7. Botones del sistema
+ * 8. Formulario de agregar libro
+ * 9. Calificación slider
+ * 10. Vista toggle
+ * 11. Filtros y búsqueda
+ * 12. Lista de libros (grid)
+ * 13. Tarjeta de libro (TarjetaLibro)
+ * 14. Panel lateral derecho (DetalleLibro)
+ * 15. Badges (etiquetas de estado)
+ * 16. Buscador expandible
+ * 17. Footer (pie de página)
+ * 18. Responsive (adaptaciones móviles)
+ */
+
+/* ============================================================================
+   1. RESET Y ESTILOS BASE
+   ============================================================================
+   
+   Resetea los estilos por defecto del navegador y establece
+   una base consistente para todos los elementos.
+*/
 * {
   margin: 0;
   padding: 0;
@@ -5,532 +49,1380 @@
 }
 
 body {
+  /* Tipografía moderna y legible */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  
+  /* Fondo degradado oscuro */
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  
+  /* Asegura que el body ocupe toda la altura */
   min-height: 100vh;
-  color: #333;
+  
+  /* Color de texto por defecto (blanco/gris claro) */
+  color: #f0f0f0;
 }
 
 .app {
+  /* Asegura que la app ocupe toda la altura de la ventana */
   min-height: 100vh;
+  
+  /* Layout vertical (flex column) */
   display: flex;
   flex-direction: column;
 }
 
-/* Header */
+/* ============================================================================
+   2. HEADER - Encabezado de la aplicación
+   ============================================================================
+   
+   Componente estático que muestra el logo y eslogan de NubeLectora.
+   ✅ REQUISITO: Componente sin props (Header)
+*/
 .header {
-  background: white;
+  /* Fondo degradado burdeos (color principal de la app) */
+  background: linear-gradient(135deg, #8B1538 0%, #A01D48 100%);
+  
+  /* Espaciado interno generoso */
   padding: 2rem;
+  
+  /* Centrado del contenido */
   text-align: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
+  /* Sombra para dar profundidad con tono burdeos */
+  box-shadow: 0 4px 20px rgba(139, 21, 56, 0.4);
+  
+  /* Separación inferior */
   margin-bottom: 2rem;
+  
+  /* Layout flexible para centrar el contenido */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .header h1 {
+  /* Tamaño grande para el título principal */
   font-size: 2.5rem;
-  color: #6200ea;
+  
+  /* Color blanco puro para máximo contraste */
+  color: #fff;
+  
+  /* Separación inferior */
   margin-bottom: 0.5rem;
+  
+  /* Sombra de texto para efecto 3D */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  
+  /* Layout flexible para centrar logo y texto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  margin-left: -90px;
+}
+
+.header-logo {
+  /* Logo al lado de titulo con las dimensiones adecuadas */
+  width: 200px;
+  height: 100px;
+  margin-right: -60px;
 }
 
 .header p {
-  color: #666;
+  /* Color blanco/gris muy claro */
+  color: #f0f0f0;
+  
+  /* Tamaño mediano para el eslogan */
   font-size: 1.1rem;
 }
 
-/* Container principal con layout de tres columnas */
+
+/* ============================================================================
+   3. CONTAINER PRINCIPAL - Layout de tres columnas
+   ============================================================================
+   
+   Estructura principal de la aplicación:
+   - Columna izquierda (18%): Formulario de agregar libro
+   - Columna central (resto): Contenido principal (estadísticas, filtros, lista)
+   - Columna derecha (25%): Panel de detalle del libro seleccionado
+*/
 .container {
+  /* Ancho completo */
   max-width: 100%;
   width: 100%;
+  
+  /* Centrado horizontal */
   margin: 0 auto;
+  
+  /* Espaciado lateral del 2% */
   padding: 0 2%;
+  
+  /* Grid de 3 columnas con anchos específicos */
   display: grid;
   grid-template-columns: 18% 1fr 25%;
+  
+  /* Espacio entre columnas del 2% */
   gap: 2%;
+  
+  /* Alineación superior de las columnas */
   align-items: start;
+  
+  /* Ocupa el espacio disponible (flex item) */
   flex: 1;
 }
 
-/* Sidebar izquierdo - Formulario */
+/* ============================================================================
+   4. SIDEBAR IZQUIERDO - Formulario de agregar libro
+   ============================================================================
+   
+   Panel lateral izquierdo que contiene el formulario para agregar nuevos libros.
+   Permanece fijo al hacer scroll (sticky).
+*/
 .sidebar-formulario {
+  /* Posición sticky para que se quede fijo al hacer scroll */
   position: sticky;
   top: 20px;
-  background: white;
+  
+  /* Fondo oscuro */
+  background: #2a2a2a;
+  
+  /* Bordes redondeados */
   border-radius: 15px;
+  
+  /* Espaciado interno */
   padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  
+  /* Sombra profunda */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  
+  /* Borde burdeos para destacar */
+  border: 2px solid #8B1538;
+  
+  /* Altura máxima (viewport menos 40px de margen) */
   max-height: calc(100vh - 40px);
+  
+  /* Scroll vertical si el contenido excede la altura */
   overflow-y: auto;
 }
 
 .sidebar-formulario h2 {
-  color: #6200ea;
+  /* Color burdeos para el título */
+  color: #A01D48;
+  
+  /* Separación inferior */
   margin-bottom: 1.2rem;
+  
+  /* Tamaño del título */
   font-size: 1.3rem;
+  
+  /* Centrado del texto */
   text-align: center;
 }
 
-/* Columna central - contenido principal */
+/* ============================================================================
+   5. COLUMNA CENTRAL - Contenido principal
+   ============================================================================
+   
+   Área principal que contiene estadísticas, filtros y lista de libros.
+   Layout vertical con espaciado entre elementos.
+*/
 .main-content {
+  /* Layout vertical (columna) */
   display: flex;
   flex-direction: column;
+  
+  /* Espacio de 2rem entre hijos */
   gap: 2rem;
 }
 
-/* Estadísticas */
+/* ============================================================================
+   6. ESTADÍSTICAS - Panel de estadísticas de lectura
+   ============================================================================
+   
+   Muestra estadísticas calculadas de la biblioteca:
+   - Total de libros
+   - Libros leídos
+   - Libros en progreso (leyendo)
+   - Libros pendientes
+   - Barra de progreso de lectura
+   
+   ✅ REQUISITO: Componente que recibe props para personalizar contenido
+*/
 .estadisticas {
-  background: white;
+  /* Fondo oscuro */
+  background: #2a2a2a;
+  
+  /* Bordes redondeados */
   border-radius: 15px;
+  
+  /* Espaciado interno */
   padding: 2rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  border-left: 5px solid #6200ea;
+  
+  /* Sombra profunda */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  
+  /* Borde izquierdo burdeos para destacar */
+  border-left: 5px solid #8B1538;
 }
 
 .estadisticas h3 {
+  /* Tamaño del título de sección */
   font-size: 1.5rem;
+  
+  /* Separación inferior */
   margin-bottom: 1.5rem;
+  
+  /* Layout horizontal con el emoji */
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  
+  /* Color burdeos */
+  color: #A01D48;
 }
 
+/* Grid de 4 columnas para las 4 estadísticas */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
 }
 
+/* Tarjeta individual de estadística */
 .stat-item {
+  /* Centrado del contenido */
   text-align: center;
+  
+  /* Espaciado interno */
   padding: 1rem;
-  background: #f5f5f5;
+  
+  /* Fondo más oscuro que el contenedor */
+  background: #1a1a1a;
+  
+  /* Bordes redondeados */
   border-radius: 10px;
+  
+  /* Transición suave al hacer hover */
   transition: transform 0.2s;
+  
+  /* Borde gris oscuro */
+  border: 2px solid #3a3a3a;
 }
 
+/* Efecto hover: la tarjeta se eleva */
 .stat-item:hover {
   transform: translateY(-5px);
+  border-color: #8B1538;
 }
 
+/* Número grande de la estadística */
 .stat-numero {
   display: block;
   font-size: 2.5rem;
   font-weight: bold;
-  color: #6200ea;
+  color: #A01D48; /* Color burdeos */
 }
 
+/* Etiqueta descriptiva de la estadística */
 .stat-label {
   display: block;
   font-size: 0.9rem;
-  color: #666;
+  color: #b0b0b0;
   margin-top: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 1px; /* Espaciado entre letras */
 }
 
+/* Contenedor de la barra de progreso */
 .progreso {
   margin-top: 1.5rem;
-  background: #e0e0e0;
+  background: #1a1a1a; /* Fondo oscuro */
   height: 10px;
   border-radius: 5px;
-  overflow: hidden;
+  overflow: hidden; /* Oculta el contenido que sobresale */
 }
 
+/* Barra de progreso interior (ancho dinámico) */
 .barra-progreso {
   height: 100%;
-  background: #6200ea;
+  /* Degradado burdeos horizontal */
+  background: linear-gradient(90deg, #8B1538, #A01D48);
+  /* Transición suave al cambiar el ancho */
   transition: width 0.5s ease;
 }
 
-/* Botones */
+/* ============================================================================
+   7. BOTONES - Sistema de botones reutilizables
+   ============================================================================
+   
+   Sistema modular de botones con diferentes variantes de color y tamaño.
+   ✅ REQUISITO: Componente reutilizable (Button)
+*/
+
+/* Estilos base para todos los botones */
 .btn {
+  /* Espaciado interno */
   padding: 0.8rem 1.5rem;
+  
+  /* Sin borde por defecto */
   border: none;
+  
+  /* Bordes muy redondeados (píldora) */
   border-radius: 25px;
+  
+  /* Tamaño de fuente */
   font-size: 1rem;
+  
+  /* Texto en negrita */
   font-weight: 600;
+  
+  /* Cursor de puntero al pasar el mouse */
   cursor: pointer;
+  
+  /* Layout flexible centrado */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  
+  /* Transiciones suaves para todos los efectos */
   transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  
+  /* Sombra oscura */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Efecto hover: botón se eleva */
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
+/* Variante PRIMARY - Color burdeos (acción principal) */
 .btn-primary {
-  background: linear-gradient(135deg, #6200ea, #7c4dff);
+  background: linear-gradient(135deg, #8B1538, #A01D48);
   color: white;
 }
 
+/* Variante SECONDARY - Color gris (acción secundaria) */
 .btn-secondary {
-  background: linear-gradient(135deg, #00bcd4, #0097a7);
+  background: linear-gradient(135deg, #3a3a3a, #4a4a4a);
   color: white;
 }
 
+/* Variante DANGER - Color rojo (acción destructiva) */
 .btn-danger {
-  background: linear-gradient(135deg, #f44336, #d32f2f);
+  background: linear-gradient(135deg, #c41e3a, #8B1538);
   color: white;
 }
 
-/* Formulario */
+/* Variante SUCCESS - Color verde (acción exitosa) */
+.btn-success {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+  color: white;
+}
+
+/* Variante WARNING - Color naranja (advertencia) */
+.btn-warning {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+  color: white;
+}
+
+/* Tamaños de botones */
+.btn-small {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}
+
+.btn-medium {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+}
+
+.btn-large {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
+
+/* Anchos de botones */
+.btn-auto {
+  width: auto;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* Icono dentro del botón */
+.btn-icono {
+  margin-right: 0.5rem;
+}
+
+/* ============================================================================
+   8. FORMULARIO - Formulario de agregar libro
+   ============================================================================
+   
+   Formulario controlado para agregar nuevos libros a la biblioteca.
+   ✅ REQUISITO: Componente formulario controlado (FormularioLibro)
+   ✅ REQUISITO: Componente con estado local (7 estados)
+*/
+
+/* Contenedor del formulario - layout vertical */
 .formulario-libro {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
 }
 
+/* Estilos para todos los inputs, selects y textareas */
 .formulario-libro input,
 .formulario-libro select,
 .formulario-libro textarea {
+  /* Ancho completo */
   width: 100%;
+  
+  /* Espaciado interno */
   padding: 0.7rem;
-  border: 2px solid #e0e0e0;
+  
+  /* Borde gris oscuro */
+  border: 2px solid #3a3a3a;
+  
+  /* Bordes redondeados */
   border-radius: 8px;
+  
+  /* Tamaño de fuente */
   font-size: 0.9rem;
+  
+  /* Transición del borde al hacer focus */
   transition: border-color 0.3s;
+  
+  /* Hereda la fuente del body */
+  font-family: inherit;
+  
+  /* Fondo oscuro */
+  background: #1a1a1a;
+  
+  /* Texto claro */
+  color: #f0f0f0;
 }
 
+/* Efecto focus: borde cambia a burdeos */
 .formulario-libro input:focus,
 .formulario-libro select:focus,
 .formulario-libro textarea:focus {
   outline: none;
-  border-color: #6200ea;
+  border-color: #8B1538;
 }
 
+/* Textarea con altura mínima y redimensionable verticalmente */
 .formulario-libro textarea {
   min-height: 70px;
   resize: vertical;
 }
 
+/* Botón de envío del formulario */
 .btn-submit {
+  /* Ancho completo */
   width: 100%;
-  background: linear-gradient(135deg, #6200ea, #7c4dff);
+  
+  /* Fondo degradado burdeos */
+  background: linear-gradient(135deg, #8B1538, #A01D48);
+  
+  /* Texto blanco */
   color: white;
+  
+  /* Espaciado interno */
   padding: 0.9rem;
+  
+  /* Sin borde */
   border: none;
+  
+  /* Bordes redondeados */
   border-radius: 8px;
+  
+  /* Tamaño de fuente */
   font-size: 0.95rem;
+  
+  /* Texto en negrita */
   font-weight: 600;
+  
+  /* Cursor de puntero */
   cursor: pointer;
+  
+  /* Transición suave al hacer hover */
   transition: transform 0.2s;
+  
+  /* Separación superior */
   margin-top: 0.5rem;
 }
 
+/* Efecto hover: botón se agranda ligeramente */
 .btn-submit:hover {
   transform: scale(1.02);
 }
 
-/* Filtros */
+/* ============================================================================
+   9. CALIFICACIÓN SLIDER - Selector de calificación
+   ============================================================================
+   
+   Control deslizante personalizado para seleccionar la calificación (0-5 estrellas).
+*/
+
+/* Contenedor del slider */
+.calificacion-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Etiqueta del slider */
+.calificacion-slider label {
+  color: #A01D48;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Input range (slider) */
+.slider {
+  width: 100%;
+  height: 8px;
+  border-radius: 5px;
+  /* Degradado de oscuro a burdeos */
+  background: linear-gradient(to right, #1a1a1a 0%, #8B1538 100%);
+  outline: none;
+  cursor: pointer;
+}
+
+/* Thumb (círculo) del slider para navegadores WebKit (Chrome, Safari, Edge) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%; /* Círculo perfecto */
+  background: #A01D48; /* Color burdeos */
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(139, 21, 56, 0.6);
+  transition: all 0.2s ease;
+}
+
+/* Efecto hover en el thumb (WebKit) */
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 12px rgba(139, 21, 56, 0.8);
+}
+
+/* Thumb (círculo) del slider para Firefox */
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%; /* Círculo perfecto */
+  background: #A01D48; /* Color burdeos */
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(139, 21, 56, 0.6);
+  transition: all 0.2s ease;
+}
+
+/* Efecto hover en el thumb (Firefox) */
+.slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 12px rgba(139, 21, 56, 0.8);
+}
+
+/* Etiquetas debajo del slider (0, 1, 2, 3, 4, 5) */
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #b0b0b0;
+  padding: 0 2px;
+}
+
+/* ============================================================================
+   10. VISTA TOGGLE - Selector de vista (Grid/Lista)
+   ============================================================================
+   
+   Permite al usuario alternar entre diferentes vistas de la lista de libros.
+*/
+
+/* Contenedor del toggle */
+.vista-toggle {
+  display: flex;
+  gap: 0.5rem;
+  background: #2a2a2a;
+  padding: 0.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  width: fit-content;
+}
+
+/* Botón individual de vista */
+.btn-vista {
+  padding: 0.6rem 1.2rem;
+  border: 2px solid #3a3a3a;
+  background: #1a1a1a;
+  color: #b0b0b0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Efecto hover en botón de vista */
+.btn-vista:hover {
+  border-color: #8B1538;
+  color: #A01D48;
+}
+
+/* Botón de vista activo */
+.btn-vista.active {
+  background: linear-gradient(135deg, #8B1538, #A01D48);
+  color: white;
+  border-color: #8B1538;
+}
+
+/* ============================================================================
+   11. FILTROS - Sistema de filtrado y búsqueda
+   ============================================================================
+   
+   Panel de filtros para buscar y filtrar libros por estado.
+   ✅ REQUISITO: Componente que recibe callbacks (Filtros)
+   ✅ REQUISITO: Componente con estado local (estadoActivo)
+*/
+
+/* Contenedor principal de filtros */
 .filtros {
-  background: white;
+  background: #2a2a2a;
   border-radius: 15px;
   padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  flex: 1;
+  border: 2px solid #8B1538;
 }
 
+/* Input de búsqueda */
 .input-busqueda {
   width: 100%;
   padding: 0.8rem 1rem;
-  border: 2px solid #e0e0e0;
-  border-radius: 25px;
+  border: 2px solid #3a3a3a;
+  border-radius: 25px; /* Muy redondeado */
   font-size: 1rem;
+  background: #1a1a1a;
+  color: #f0f0f0;
 }
 
+/* Efecto focus en el input de búsqueda */
 .input-busqueda:focus {
   outline: none;
-  border-color: #6200ea;
+  border-color: #8B1538;
 }
 
+/* Placeholder del input */
+.input-busqueda::placeholder {
+  color: #666;
+}
+
+/* Contenedor de botones de filtro por estado */
 .filtros-estado {
   display: flex;
   gap: 0.5rem;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Permite que los botones se envuelvan */
 }
 
+/* Botones de filtro por estado */
 .filtros-estado button {
   padding: 0.5rem 1rem;
-  border: 2px solid #6200ea;
-  background: white;
-  color: #6200ea;
+  border: 2px solid #8B1538;
+  background: #1a1a1a;
+  color: #A01D48;
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s;
   font-weight: 600;
 }
 
+/* Efecto hover y estado activo en botones de filtro */
 .filtros-estado button:hover,
 .filtros-estado button.active {
-  background: #6200ea;
+  background: linear-gradient(135deg, #8B1538, #A01D48);
   color: white;
 }
 
-/* Lista de libros - Grid de 2 columnas */
+/* ============================================================================
+   12. LISTA DE LIBROS - Grid de tarjetas de libros
+   ============================================================================
+   
+   Grid responsivo que contiene múltiples TarjetaLibro.
+   ✅ REQUISITO: Componente que muestra lista de elementos (ListaLibros)
+*/
+
+/* Grid de 4 columnas para las tarjetas de libros */
 .lista-libros {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   padding: 1rem 0;
 }
 
-/* Tarjeta de libro */
-.libro-card {
-  background: white;
+/* Mensaje cuando no hay libros (lista vacía) */
+.lista-vacia {
+  text-align: center;
+  padding: 3rem;
+  background: #2a2a2a;
   border-radius: 15px;
+  color: #b0b0b0;
+  font-size: 1.2rem;
+  border: 2px solid #3a3a3a;
+}
+
+/* ============================================================================
+   13. TARJETA DE LIBRO - Card individual de libro (TarjetaLibro)
+   ============================================================================
+   
+   Tarjeta reutilizable que muestra la información de un libro.
+   ✅ REQUISITO: Componente reutilizable (TarjetaLibro)
+   ✅ REQUISITO: Componente que recibe props para personalizar contenido
+   ✅ REQUISITO: Componente que recibe callbacks
+   ✅ REQUISITO: Usado múltiples veces con .map()
+*/
+
+/* Contenedor principal de la tarjeta de libro */
+.tarjeta-libro {
+  /* Fondo oscuro */
+  background: #2a2a2a;
+  
+  /* Bordes muy redondeados */
+  border-radius: 15px;
+  
+  /* Borde gris oscuro */
+  border: 2px solid #3a3a3a;
+  
+  /* Espaciado interno */
   padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  
+  /* Cursor de puntero (toda la tarjeta es clickeable) */
   cursor: pointer;
+  
+  /* Transiciones suaves para efectos hover */
   transition: all 0.3s ease;
+  
+  /* Posicionamiento relativo para el botón eliminar absoluto */
   position: relative;
+  
+  /* Oculta el botón eliminar que sobresale */
   overflow: hidden;
+  
+  /* Sombra profunda */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-.libro-card:hover {
+/* Efecto hover en la tarjeta: se eleva y cambia borde a burdeos */
+.tarjeta-libro:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 25px rgba(139, 21, 56, 0.4);
+  border-color: #8B1538;
 }
 
-.libro-card img {
+/* Imagen de portada del libro */
+.tarjeta-libro img {
+  /* Ancho completo del contenedor */
   width: 100%;
+  
+  /* Altura fija */
   height: 250px;
+  
+  /* Recorte y ajuste de imagen */
   object-fit: cover;
+  
+  /* Bordes redondeados */
   border-radius: 10px;
+  
+  /* Separación inferior */
   margin-bottom: 1rem;
 }
 
-.libro-card h3 {
-  color: #333;
+/* Título del libro */
+.tarjeta-libro h3 {
+  /* Color claro */
+  color: #f0f0f0;
+  
+  /* Tamaño del título */
   font-size: 1.2rem;
+  
+  /* Separación inferior */
   margin-bottom: 0.5rem;
+  
+  /* Manejo de texto largo: oculta con puntos suspensivos */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.libro-card .autor {
-  color: #666;
+/* Autor del libro */
+.tarjeta-libro .autor {
+  /* Color gris claro */
+  color: #b0b0b0;
+  
+  /* Tamaño de fuente */
   font-size: 0.9rem;
+  
+  /* Separación inferior */
   margin-bottom: 0.8rem;
 }
 
-.libro-card .estado {
-  display: inline-block;
-  padding: 0.3rem 0.8rem;
-  border-radius: 15px;
-  color: white;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
-
-.libro-card .calificacion {
+/* Calificación en estrellas */
+.tarjeta-libro .calificacion {
   font-size: 1.2rem;
   margin-top: 0.5rem;
 }
 
+/* Botón de eliminar (X) en la esquina superior derecha */
 .btn-delete {
+  /* Posicionamiento absoluto respecto a .tarjeta-libro */
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: rgba(244, 67, 54, 0.9);
+  
+  /* Fondo rojo translúcido */
+  background: rgba(196, 30, 58, 0.9);
+  
+  /* Texto blanco */
   color: white;
+  
+  /* Sin borde */
   border: none;
+  
+  /* Círculo perfecto */
   border-radius: 50%;
+  
+  /* Dimensiones fijas */
   width: 35px;
   height: 35px;
+  
+  /* Cursor de puntero */
   cursor: pointer;
+  
+  /* Tamaño de fuente para la X */
   font-size: 1.2rem;
+  
+  /* Centrado del contenido */
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  /* Transiciones suaves */
   transition: all 0.3s;
+  
+  /* Inicialmente invisible */
   opacity: 0;
 }
 
-.libro-card:hover .btn-delete {
+/* Botón eliminar visible solo al hacer hover sobre la tarjeta */
+.tarjeta-libro:hover .btn-delete {
   opacity: 1;
 }
 
+/* Efecto hover en el botón eliminar: se agranda y cambia color */
 .btn-delete:hover {
   transform: scale(1.1);
-  background: rgba(211, 47, 47, 1);
+  background: rgba(139, 21, 56, 1);
 }
 
-/* Panel lateral derecho - Detalle del libro */
+/* ============================================================================
+   14. PANEL LATERAL DERECHO - Detalle del libro seleccionado
+   ============================================================================
+   
+   Panel que muestra información detallada del libro seleccionado.
+   ✅ REQUISITO: Panel de información de elemento seleccionado (DetalleLibro)
+*/
+
+/* Contenedor del panel de detalle */
 .detalle-libro-panel {
+  /* Posición sticky para que se quede fijo al hacer scroll */
   position: sticky;
   top: 20px;
-  background: white;
+  
+  /* Fondo oscuro */
+  background: #2a2a2a;
+  
+  /* Bordes redondeados */
   border-radius: 15px;
+  
+  /* Espaciado interno */
   padding: 2rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  
+  /* Sombra profunda */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  
+  /* Borde burdeos */
+  border: 2px solid #8B1538;
+  
+  /* Altura máxima (viewport menos 40px de margen) */
   max-height: calc(100vh - 40px);
+  
+  /* Scroll vertical si el contenido excede la altura */
   overflow-y: auto;
 }
 
+/* Estado vacío: cuando no hay libro seleccionado */
 .detalle-libro-panel.empty {
+  /* Centra el mensaje de "Selecciona un libro" */
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #999;
+  
+  /* Texto gris */
+  color: #b0b0b0;
+  
+  /* Tamaño de fuente */
   font-size: 1.1rem;
+  
+  /* Centrado del texto */
   text-align: center;
+  
+  /* Altura mínima */
   min-height: 300px;
 }
 
+/* ========== IMAGEN DE PORTADA EN PANEL DE DETALLE ========== */
+
 .detalle-libro-panel img {
-  width: 80%;
-  max-width: 250px;
+  /* Ancho FIJO - todas las imágenes tendrán este ancho */
+  width: 250px;
+  
+  /* Altura FIJA - todas las imágenes tendrán esta altura */
+  height: 420px;
+  
+  /* object-fit: cover - recorta la imagen manteniendo la proporción */
+  /* La imagen cubre completamente el área sin deformarse */
+  object-fit: cover;
+  
+  /* Centrado horizontal de la imagen */
   margin: 0 auto;
   display: block;
+  
+  /* Bordes redondeados */
   border-radius: 10px;
+  
+  /* Separación inferior */
   margin-bottom: 1.5rem;
+  
+  /* Sombra para dar profundidad */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
+/* Título del libro en el panel de detalle */
 .detalle-libro-panel h2 {
-  color: #6200ea;
+  /* Color burdeos */
+  color: #A01D48;
+  
+  /* Tamaño grande */
   font-size: 1.8rem;
+  
+  /* Separación inferior */
   margin-bottom: 0.5rem;
 }
 
+/* Autor en el panel de detalle */
 .detalle-libro-panel h3 {
-  color: #666;
+  /* Color gris claro */
+  color: #b0b0b0;
+  
+  /* Tamaño mediano */
   font-size: 1.2rem;
+  
+  /* Separación inferior */
   margin-bottom: 1rem;
 }
 
+/* Año de publicación */
 .detalle-libro-panel .año {
-  color: #999;
+  color: #888;
   font-size: 0.9rem;
   margin-bottom: 1rem;
 }
 
+/* ============================================================================
+   15. BADGES - Etiquetas de estado (leído, leyendo, pendiente)
+   ============================================================================
+   
+   Etiquetas visuales que indican el estado de lectura de un libro.
+   ✅ REQUISITO: Componente reutilizable (EtiquetaEstado)
+   ✅ REQUISITO: Componente que recibe props para personalizar apariencia
+*/
+
+/* Estilos base para todos los badges */
 .badge {
+  /* Elemento en línea */
   display: inline-block;
+  
+  /* Espaciado interno */
   padding: 0.5rem 1rem;
+  
+  /* Bordes muy redondeados (píldora) */
   border-radius: 20px;
+  
+  /* Texto blanco */
   color: white;
+  
+  /* Tamaño de fuente */
   font-size: 0.9rem;
+  
+  /* Texto en negrita */
   font-weight: 600;
+  
+  /* Texto en mayúsculas */
   text-transform: uppercase;
+  
+  /* Separación inferior */
   margin-bottom: 1rem;
 }
 
+/* Badge LEÍDO - Verde (éxito) */
 .badge-leido {
-  background: #4caf50;
+  background: linear-gradient(135deg, #4caf50, #45a049);
 }
 
+/* Badge LEYENDO - Naranja (en progreso) */
 .badge-leyendo {
-  background: #ff9800;
+  background: linear-gradient(135deg, #ff9800, #f57c00);
 }
 
+/* Badge PENDIENTE - Rojo/Burdeos (pendiente) */
 .badge-pendiente {
-  background: #f44336;
+  background: linear-gradient(135deg, #c41e3a, #8B1538);
 }
 
+/* Calificación en estrellas en el panel de detalle */
 .calificacion-detalle {
   font-size: 1.5rem;
   margin: 1rem 0;
 }
 
+/* Sección de reseña */
 .resena {
+  /* Separación superior */
   margin-top: 1.5rem;
+  
+  /* Relleno superior */
   padding-top: 1.5rem;
-  border-top: 2px solid #f0f0f0;
+  
+  /* Borde superior como separador */
+  border-top: 2px solid #3a3a3a;
 }
 
+/* Título de la reseña */
 .resena h4 {
-  color: #6200ea;
+  color: #A01D48;
   margin-bottom: 0.8rem;
 }
 
+/* Texto de la reseña */
 .resena p {
-  color: #555;
-  line-height: 1.6;
+  color: #d0d0d0;
+  line-height: 1.6; /* Interlineado para mejor legibilidad */
 }
 
-/* Footer */
-.footer {
-  background: white;
-  padding: 2rem;
-  text-align: center;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 2rem;
-  color: #6200ea;
-  font-size: 1rem;
+/* ============================================================================
+   16. BUSCADOR EXPANDIBLE - Sistema de búsqueda avanzado
+   ============================================================================
+   
+   Componente de búsqueda con opciones avanzadas expandibles.
+*/
+
+/* Contenedor principal del buscador */
+.buscador-expandible {
+  background: #2a2a2a;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 2px solid #8B1538;
+}
+
+/* Buscador principal con botón de limpiar */
+.buscador-principal {
+  /* Posicionamiento relativo para el botón absoluto */
+  position: relative;
+  
+  /* Layout horizontal */
+  display: flex;
+  align-items: center;
+}
+
+/* Input de búsqueda con espacio para el botón limpiar */
+.buscador-principal .input-busqueda {
+  flex: 1;
+  padding-right: 3rem; /* Espacio para el botón X */
+}
+
+/* Botón para limpiar la búsqueda (X) */
+.btn-limpiar {
+  /* Posicionamiento absoluto dentro del input */
+  position: absolute;
+  right: 1rem;
+  
+  /* Fondo rojo degradado */
+  background: linear-gradient(135deg, #c41e3a, #8B1538);
+  
+  /* Texto blanco */
+  color: white;
+  
+  /* Sin borde */
+  border: none;
+  
+  /* Círculo perfecto */
+  border-radius: 50%;
+  
+  /* Dimensiones */
+  width: 28px;
+  height: 28px;
+  
+  /* Cursor de puntero */
+  cursor: pointer;
+  
+  /* Centrado del contenido */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Tamaño del símbolo X */
+  font-size: 1.2rem;
+  
+  /* Transiciones suaves */
+  transition: all 0.3s;
+  
+  /* Texto en negrita */
+  font-weight: bold;
+}
+
+/* Efecto hover: cambia color y rota 90 grados */
+.btn-limpiar:hover {
+  background: linear-gradient(135deg, #8B1538, #6B0F28);
+  transform: rotate(90deg);
+}
+
+/* Botón para expandir opciones de búsqueda */
+.btn-expandir {
+  padding: 0.6rem 1rem;
+  border: 2px solid #8B1538;
+  background: #1a1a1a;
+  color: #A01D48;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
   font-weight: 600;
+  font-size: 0.9rem;
 }
 
-/* Responsive */
-@media (max-width: 1400px) {
-  .container {
-    grid-template-columns: 18% 1fr 23%;
+/* Efecto hover en botón expandir */
+.btn-expandir:hover {
+  background: linear-gradient(135deg, #8B1538, #A01D48);
+  color: white;
+}
+
+/* Panel de opciones de búsqueda expandible */
+.opciones-busqueda {
+  padding: 1rem;
+  background: #1a1a1a;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  /* Animación de aparición */
+  animation: slideDown 0.3s ease;
+  border: 1px solid #3a3a3a;
+}
+
+/* Animación slideDown para opciones de búsqueda */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+/* Texto informativo */
+.texto-info {
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Estadísticas de búsqueda */
+.estadisticas-busqueda {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* ============================================================================
+   17. FOOTER - Pie de página
+   ============================================================================
+   
+   Componente estático que muestra información de copyright.
+   ✅ REQUISITO: Componente sin props (Footer)
+*/
+.footer {
+  /* Fondo degradado burdeos (igual que el header) */
+  background: linear-gradient(135deg, #8B1538 0%, #A01D48 100%);
+  
+  /* Espaciado interno */
+  padding: 2rem;
+  
+  /* Centrado del texto */
+  text-align: center;
+  
+  /* Sombra superior con tono burdeos */
+  box-shadow: 0 -4px 20px rgba(139, 21, 56, 0.4);
+  
+  /* Separación superior */
+  margin-top: 2rem;
+  
+  /* Color de texto claro */
+  color: #f0f0f0;
+  
+  /* Tamaño de fuente */
+  font-size: 1rem;
+  
+  /* Texto en negrita */
+  font-weight: 600;
+}
+
+/* ============================================================================
+   18. RESPONSIVE - Adaptación a diferentes tamaños de pantalla
+   ============================================================================
+   
+   Media queries para adaptar el diseño a tablets, móviles y pantallas pequeñas.
+*/
+
+/* Tablets grandes (max-width: 1400px) */
+@media (max-width: 1400px) {
+  /* Ajusta el grid principal a columnas más estrechas */
+  .container {
+    grid-template-columns: 18% 1fr 23%;
+  }
+  
+  /* Grid de libros: 3 columnas en lugar de 4 */
+  .lista-libros {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Tablets y móviles (max-width: 1200px) */
 @media (max-width: 1200px) {
+  /* Grid principal: una sola columna (layout vertical) */
   .container {
     grid-template-columns: 1fr;
   }
 
+  /* Sidebar formulario: panel lateral móvil deslizable desde la izquierda */
   .sidebar-formulario {
     position: fixed;
-    left: -100%;
+    left: -100%; /* Inicialmente oculto fuera de pantalla */
     top: 0;
     width: 90%;
     max-width: 300px;
     height: 100vh;
-    z-index: 1000;
-    transition: left 0.3s ease;
+    z-index: 1000; /* Por encima de todo */
+    transition: left 0.3s ease; /* Animación de deslizamiento */
     max-height: 100vh;
   }
 
+  /* Mostrar sidebar cuando tiene clase 'show' */
   .sidebar-formulario.show {
     left: 0;
   }
 
+  /* Panel de detalle: panel lateral móvil deslizable desde la derecha */
   .detalle-libro-panel {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: -100%; /* Inicialmente oculto fuera de pantalla */
     width: 90%;
     max-width: 400px;
     height: 100vh;
-    z-index: 1000;
-    transition: right 0.3s ease;
+    z-index: 1000; /* Por encima de todo */
+    transition: right 0.3s ease; /* Animación de deslizamiento */
     max-height: 100vh;
   }
 
+  /* Mostrar panel de detalle cuando tiene clase 'show' */
   .detalle-libro-panel.show {
     right: 0;
   }
 
+  /* Imagen en panel de detalle móvil - mantiene tamaño fijo */
   .detalle-libro-panel img {
-    width: 60%;
-    max-width: 200px;
+    width: 180px;
+    height: 270px;
+  }
+  
+  /* Grid de libros: 2 columnas en tablets */
+  .lista-libros {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
+/* Móviles pequeños (max-width: 768px) */
 @media (max-width: 768px) {
+  /* Grid de estadísticas: 2 columnas en lugar de 4 */
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Grid de libros: 1 columna en móviles */
   .lista-libros {
     grid-template-columns: 1fr;
   }
 
+  /* Sidebars ocupan todo el ancho en móviles pequeños */
   .sidebar-formulario,
   .detalle-libro-panel {
     width: 100%;
     max-width: 100%;
+  }
+  
+  /* Imagen en panel de detalle móvil pequeño - tamaño reducido pero fijo */
+  .detalle-libro-panel img {
+    width: 150px;
+    height: 225px;
+  }
+  
+  /* Imagen de tarjeta más pequeña en móvil */
+  .tarjeta-libro img {
+    height: 200px;
+  }
+  
+  /* Título de tarjeta más pequeño */
+  .tarjeta-libro h3 {
+    font-size: 1rem;
+  }
+  
+  /* Autor más pequeño */
+  .tarjeta-libro .autor {
+    font-size: 0.85rem;
+  }
+  
+  /* Botón eliminar siempre visible en móvil (no solo hover) */
+  .btn-delete {
+    opacity: 1;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
   }
 }
