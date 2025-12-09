@@ -1,6 +1,3 @@
-// src/components/EtiquetaEstado.tsx
-import "./EtiquetaEstado.css"; 
-
 interface PropsEtiqueta {
   estado: "leido" | "pendiente" | "leyendo";
 }

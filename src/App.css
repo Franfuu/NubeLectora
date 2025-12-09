@@ -1,42 +1,536 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  background: white;
   padding: 2rem;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: #6200ea;
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Container principal con layout de tres columnas */
+.container {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2%;
+  display: grid;
+  grid-template-columns: 18% 1fr 25%;
+  gap: 2%;
+  align-items: start;
+  flex: 1;
+}
+
+/* Sidebar izquierdo - Formulario */
+.sidebar-formulario {
+  position: sticky;
+  top: 20px;
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+.sidebar-formulario h2 {
+  color: #6200ea;
+  margin-bottom: 1.2rem;
+  font-size: 1.3rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Columna central - contenido principal */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Estadísticas */
+.estadisticas {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #6200ea;
+}
+
+.estadisticas h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1rem;
+  background: #f5f5f5;
+  border-radius: 10px;
+  transition: transform 0.2s;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+}
+
+.stat-numero {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #6200ea;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.progreso {
+  margin-top: 1.5rem;
+  background: #e0e0e0;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.barra-progreso {
+  height: 100%;
+  background: #6200ea;
+  transition: width 0.5s ease;
+}
+
+/* Botones */
+.btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #6200ea, #7c4dff);
+  color: white;
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #00bcd4, #0097a7);
+  color: white;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+  color: white;
+}
+
+/* Formulario */
+.formulario-libro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.formulario-libro input,
+.formulario-libro select,
+.formulario-libro textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: border-color 0.3s;
+}
+
+.formulario-libro input:focus,
+.formulario-libro select:focus,
+.formulario-libro textarea:focus {
+  outline: none;
+  border-color: #6200ea;
+}
+
+.formulario-libro textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.btn-submit {
+  width: 100%;
+  background: linear-gradient(135deg, #6200ea, #7c4dff);
+  color: white;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+  margin-top: 0.5rem;
+}
+
+.btn-submit:hover {
+  transform: scale(1.02);
+}
+
+/* Filtros */
+.filtros {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input-busqueda {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 1rem;
+}
+
+.input-busqueda:focus {
+  outline: none;
+  border-color: #6200ea;
+}
+
+.filtros-estado {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filtros-estado button {
+  padding: 0.5rem 1rem;
+  border: 2px solid #6200ea;
+  background: white;
+  color: #6200ea;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+
+.filtros-estado button:hover,
+.filtros-estado button.active {
+  background: #6200ea;
+  color: white;
+}
+
+/* Lista de libros - Grid de 2 columnas */
+.lista-libros {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+/* Tarjeta de libro */
+.libro-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.libro-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.libro-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.libro-card h3 {
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.libro-card .autor {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+}
+
+.libro-card .estado {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.libro-card .calificacion {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.btn-delete {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(244, 67, 54, 0.9);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  opacity: 0;
+}
+
+.libro-card:hover .btn-delete {
+  opacity: 1;
+}
+
+.btn-delete:hover {
+  transform: scale(1.1);
+  background: rgba(211, 47, 47, 1);
+}
+
+/* Panel lateral derecho - Detalle del libro */
+.detalle-libro-panel {
+  position: sticky;
+  top: 20px;
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+.detalle-libro-panel.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 1.1rem;
+  text-align: center;
+  min-height: 300px;
+}
+
+.detalle-libro-panel img {
+  width: 80%;
+  max-width: 250px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.detalle-libro-panel h2 {
+  color: #6200ea;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.detalle-libro-panel h3 {
+  color: #666;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.detalle-libro-panel .año {
+  color: #999;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.badge-leido {
+  background: #4caf50;
+}
+
+.badge-leyendo {
+  background: #ff9800;
+}
+
+.badge-pendiente {
+  background: #f44336;
+}
+
+.calificacion-detalle {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+.resena {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #f0f0f0;
+}
+
+.resena h4 {
+  color: #6200ea;
+  margin-bottom: 0.8rem;
+}
+
+.resena p {
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+  background: white;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+  color: #6200ea;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+  .container {
+    grid-template-columns: 18% 1fr 23%;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (max-width: 1200px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar-formulario {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    width: 90%;
+    max-width: 300px;
+    height: 100vh;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    max-height: 100vh;
+  }
+
+  .sidebar-formulario.show {
+    left: 0;
+  }
+
+  .detalle-libro-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 90%;
+    max-width: 400px;
+    height: 100vh;
+    z-index: 1000;
+    transition: right 0.3s ease;
+    max-height: 100vh;
+  }
+
+  .detalle-libro-panel.show {
+    right: 0;
+  }
+
+  .detalle-libro-panel img {
+    width: 60%;
+    max-width: 200px;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-}
 
-.card {
-  padding: 2em;
-}
+  .lista-libros {
+    grid-template-columns: 1fr;
+  }
 
-.read-the-docs {
-  color: #888;
+  .sidebar-formulario,
+  .detalle-libro-panel {
+    width: 100%;
+    max-width: 100%;
+  }
 }

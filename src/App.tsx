@@ -1,68 +1,89 @@
 // src/App.tsx
-import { useState } from "react";
-import { librosIniciales } from "./data/libros"; // Asumiendo que ya creaste este archivo
-import type { Libro } from "./types/libro";
-
-// Importamos nuestros componentes en español
-import Header from "./components/Header";
-import ListaLibros from "./components/ListaLibros";
-import DetalleLibro from "./components/DetalleLibro";
-import FormularioLibro from "./components/FormularioLibro";
-import "./App.css";
+// Componente raíz App con gestión de estados
+import { useState } from 'react';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import FormularioLibro from './components/FormularioLibro';
+import ListaLibros from './components/ListaLibros';
+import DetalleLibro from './components/DetalleLibro';
+import Filtros from './components/Filtros';
+import Estadisticas from './components/Estadisticas';
+import { librosIniciales } from './data/libros';
+import type { Libro } from './types/libro';
+import './App.css';
 
 function App() {
-  // ESTADO COMPARTIDO (Requisito B.2)
-  // 1. Array de libros: lo leen ListaLibros y lo modifica FormularioLibro/DetalleLibro
   const [libros, setLibros] = useState<Libro[]>(librosIniciales);
-  
-  // 2. Libro seleccionado: lo modifica ListaLibros y lo lee DetalleLibro
   const [libroSeleccionado, setLibroSeleccionado] = useState<Libro | null>(null);
+  const [filtroEstado, setFiltroEstado] = useState<string>('todos');
+  const [busqueda, setBusqueda] = useState('');
 
-  // Funciones para modificar el estado (Callbacks)
-  
-  function agregarLibro(nuevo: Libro) {
-    setLibros([...libros, nuevo]);
-  }
+  const agregarLibro = (nuevoLibro: Omit<Libro, 'id'>) => {
+    const id = Math.max(...libros.map(l => l.id)) + 1;
+    setLibros([...libros, { ...nuevoLibro, id }]);
+  };
 
-  function seleccionarLibro(libro: Libro) {
-    setLibroSeleccionado(libro);
-  }
+  const eliminarLibro = (id: number) => {
+    setLibros(libros.filter(libro => libro.id !== id));
+    if (libroSeleccionado?.id === id) {
+      setLibroSeleccionado(null);
+    }
+  };
 
-  function borrarLibro(id: number) {
-    setLibros(libros.filter((l) => l.id !== id));
-    setLibroSeleccionado(null); // Deseleccionar si lo borramos
-  }
+  const seleccionarLibro = (id: number) => {
+    const libro = libros.find(l => l.id === id);
+    setLibroSeleccionado(libro || null);
+  };
+
+  const librosFiltrados = libros.filter(libro => {
+    const cumpleFiltroEstado = filtroEstado === 'todos' || libro.estado === filtroEstado;
+    const cumpleBusqueda = 
+      libro.titulo.toLowerCase().includes(busqueda.toLowerCase()) ||
+      libro.autor.toLowerCase().includes(busqueda.toLowerCase());
+    
+    return cumpleFiltroEstado && cumpleBusqueda;
+  });
 
   return (
-    <div className="contenedor-app">
-      <Header /> {/* Requisito A: Componente sin props */}
+    <div className="app">
+      <Header />
       
-      <main className="contenido-principal">
-        <section className="panel-izquierdo">
-          <FormularioLibro alAgregarLibro={agregarLibro} />
-          
-          <div className="separador"></div>
-          
-          <h3>Mi Colección</h3>
-          <ListaLibros 
-            libros={libros} 
-            alSeleccionarLibro={seleccionarLibro} 
-          />
-        </section>
+      <div className="container">
+        {/* Sidebar izquierdo - Formulario */}
+        <aside className="sidebar-formulario">
+          <FormularioLibro onAgregarLibro={agregarLibro} />
+        </aside>
 
-        <section className="panel-derecho">
-          {/* Requisito A: Visor de elemento */}
+        {/* Columna central - Contenido principal */}
+        <main className="main-content">
+          <Estadisticas libros={libros} color="#6200ea" mostrarDetalles={true} />
+
+          <Filtros 
+            onFiltrarEstado={setFiltroEstado}
+            onBuscar={setBusqueda}
+          />
+
+          <ListaLibros 
+            libros={librosFiltrados}
+            onSelectLibro={seleccionarLibro}
+            onDeleteLibro={eliminarLibro}
+          />
+        </main>
+
+        {/* Panel derecho - Detalle del libro */}
+        <aside className={`detalle-libro-panel ${libroSeleccionado ? 'show' : 'empty'}`}>
           {libroSeleccionado ? (
-            
             <DetalleLibro 
-              libro={libroSeleccionado} 
-              alBorrar={borrarLibro} 
+              libro={libroSeleccionado}
+              onClose={() => setLibroSeleccionado(null)}
             />
           ) : (
-            <p className="mensaje-vacio">Selecciona un libro para ver los detalles</p>
+            <p>📖 Selecciona un libro para ver sus detalles</p>
           )}
-        </section>
-      </main>
+        </aside>
+      </div>
+
+      <Footer />
     </div>
   );
 }
