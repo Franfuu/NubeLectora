@@ -1,104 +1,104 @@
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import type { Libro } from "../types/libro";
 
-interface PropsFormulario {
-  alAgregarLibro: (nuevoLibro: Libro) => void;
+interface FormularioLibroProps {
+  onAgregarLibro: (libro: Omit<Libro, "id">) => void;
 }
 
-function FormularioLibro({ alAgregarLibro }: PropsFormulario) {
+const FormularioLibro = ({ onAgregarLibro }: FormularioLibroProps) => {
   const [titulo, setTitulo] = useState("");
   const [autor, setAutor] = useState("");
-  const [año, setAño] = useState("");
-  const [calificacion, setCalificacion] = useState(0);
-  const [reseña, setReseña] = useState("");
-  const [estado, setEstado] = useState<"leido" | "leyendo" | "pendiente">("pendiente");
+  const [portada, setPortada] = useState("");
+  const [año, setAño] = useState<number | undefined>();
+  const [estado, setEstado] = useState<"leido" | "pendiente" | "leyendo">("pendiente");
+  const [resena, setResena] = useState("");
+  const [calificacion, setCalificacion] = useState<number | undefined>();
 
-  function manejarEnvio(e: FormEvent) {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!titulo.trim() || !autor.trim()) return;
-
-    const nuevoLibro: Libro = {
-      id: Date.now(),
+    
+    onAgregarLibro({
       titulo,
       autor,
-      año: año ? parseInt(año) : undefined,
-      calificacion: calificacion > 0 ? calificacion : undefined,
-      resena: reseña.trim() || undefined,
-      portada: "https://via.placeholder.com/150",
-      estado
-    };
+      portada,
+      año,
+      estado,
+      resena: resena || undefined,
+      calificacion
+    });
 
-    alAgregarLibro(nuevoLibro);
-    
-    // Limpiamos el formulario
+    // Resetear formulario
     setTitulo("");
     setAutor("");
-    setAño("");
-    setCalificacion(0);
-    setReseña("");
+    setPortada("");
+    setAño(undefined);
     setEstado("pendiente");
-  }
+    setResena("");
+    setCalificacion(undefined);
+  };
 
   return (
-    <form onSubmit={manejarEnvio} className="formulario-libro">
-      <h2>Nuevo Libro</h2>
+    <form onSubmit={handleSubmit} className="formulario-libro">
+      <h2>➕ Agregar Nuevo Libro</h2>
       
-      <input 
-        type="text" 
-        placeholder="Título del libro *" 
-        value={titulo} 
+      <input
+        type="text"
+        placeholder="Título"
+        value={titulo}
         onChange={(e) => setTitulo(e.target.value)}
         required
       />
       
-      <input 
-        type="text" 
-        placeholder="Autor *" 
-        value={autor} 
+      <input
+        type="text"
+        placeholder="Autor"
+        value={autor}
         onChange={(e) => setAutor(e.target.value)}
         required
       />
       
-      <input 
-        type="number" 
-        placeholder="Año de publicación" 
-        value={año} 
-        onChange={(e) => setAño(e.target.value)}
-        min="1000"
-        max={new Date().getFullYear()}
+      <input
+        type="url"
+        placeholder="URL de la portada"
+        value={portada}
+        onChange={(e) => setPortada(e.target.value)}
+        required
       />
       
-      <select 
-        value={estado} 
-        onChange={(e) => setEstado(e.target.value as "leido" | "leyendo" | "pendiente")}
-      >
+      <input
+        type="number"
+        placeholder="Año (opcional)"
+        value={año || ""}
+        onChange={(e) => setAño(e.target.value ? Number(e.target.value) : undefined)}
+      />
+      
+      <select value={estado} onChange={(e) => setEstado(e.target.value as any)}>
         <option value="pendiente">Pendiente</option>
         <option value="leyendo">Leyendo</option>
         <option value="leido">Leído</option>
       </select>
       
-      <div className="formulario-libro__calificacion">
-        <label>Calificación: {calificacion > 0 ? `${calificacion}/5` : 'Sin calificar'}</label>
-        <input 
-          type="range" 
-          min="0" 
-          max="5" 
-          step="1"
-          value={calificacion} 
-          onChange={(e) => setCalificacion(parseInt(e.target.value))}
-        />
-      </div>
-      
-      <textarea 
-        placeholder="Reseña (opcional)" 
-        value={reseña} 
-        onChange={(e) => setReseña(e.target.value)}
-        rows={4}
+      <textarea
+        placeholder="Reseña (opcional)"
+        value={resena}
+        onChange={(e) => setResena(e.target.value)}
       />
       
-      <button type="submit">Añadir a la colección</button>
+      <select 
+        value={calificacion || ""} 
+        onChange={(e) => setCalificacion(e.target.value ? Number(e.target.value) : undefined)}
+      >
+        <option value="">Sin calificación</option>
+        <option value="1">⭐ 1</option>
+        <option value="2">⭐ 2</option>
+        <option value="3">⭐ 3</option>
+        <option value="4">⭐ 4</option>
+        <option value="5">⭐ 5</option>
+      </select>
+      
+      <button type="submit" className="btn-submit">Agregar Libro</button>
     </form>
   );
-}
+};
 
 export default FormularioLibro;

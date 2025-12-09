@@ -1,25 +1,26 @@
 // src/components/ListaLibros.tsx
-import type { Libro } from "../types/libro";
-import TarjetaLibro from "./TarjetaLibro";
-import "./ListaLibros.css";
+import LibroCard from './LibroCard';
+import type { Libro } from '../types/libro';
 
-interface PropsLista {
+interface ListaLibrosProps {
   libros: Libro[];
-  alSeleccionarLibro: (libro: Libro) => void;
+  onSelectLibro: (id: number) => void;
+  onDeleteLibro: (id: number) => void;
 }
- 
-function ListaLibros({ libros, alSeleccionarLibro }: PropsLista) {
+
+const ListaLibros = ({ libros, onSelectLibro, onDeleteLibro }: ListaLibrosProps) => {
   return (
     <div className="lista-libros">
-      {libros.map((libro) => (
-        <TarjetaLibro 
-          key={libro.id} 
-          libro={libro} 
-          alSeleccionar={alSeleccionarLibro} 
+      {libros.map(libro => (
+        <LibroCard
+          key={libro.id}
+          libro={libro}
+          onSelect={onSelectLibro}
+          onDelete={onDeleteLibro}
         />
       ))}
     </div>
   );
-}
+};
 
 export default ListaLibros;
