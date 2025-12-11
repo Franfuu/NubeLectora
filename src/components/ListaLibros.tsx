@@ -56,6 +56,7 @@ const ListaLibros = ({ libros, onSelectLibro, onDeleteLibro }: ListaLibrosProps)
           libro={libro} // ✅ Prop: datos del libro
           onSelect={onSelectLibro} // ✅ Callback: seleccionar libro
           onDelete={onDeleteLibro} // ✅ Callback: eliminar libro
+          mostrarDetalles={true}
         />
       ))}
     </div>

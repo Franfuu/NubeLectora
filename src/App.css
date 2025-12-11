@@ -31,8 +31,9 @@
  * 14. Panel lateral derecho (DetalleLibro)
  * 15. Badges (etiquetas de estado)
  * 16. Buscador expandible
- * 17. Footer (pie de página)
- * 18. Responsive (adaptaciones móviles)
+ * 17. Carrusel
+ * 18. Footer (pie de página)
+ * 19. Responsive (adaptaciones móviles)
  */
 
 /* ============================================================================
@@ -46,6 +47,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
+  /* ✅ NUEVO: Ocultar scrollbar en todos los elementos */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer y Edge */
+}
+
+/* ✅ NUEVO: Ocultar scrollbar en navegadores WebKit (Chrome, Safari, Edge) */
+*::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -969,6 +979,15 @@ body {
   
   /* Scroll vertical si el contenido excede la altura */
   overflow-y: auto;
+  
+  /* ✅ NUEVO: Ocultar scrollbar específicamente en el panel de detalle */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer y Edge */
+}
+
+/* ✅ NUEVO: Ocultar scrollbar WebKit en panel de detalle */
+.detalle-libro-panel::-webkit-scrollbar {
+  display: none;
 }
 
 /* Estado vacío: cuando no hay libro seleccionado */
@@ -1271,7 +1290,7 @@ body {
 }
 
 /* ============================================================================
-   17. FOOTER - Pie de página
+   18. FOOTER - Pie de página
    ============================================================================
    
    Componente estático que muestra información de copyright.
@@ -1304,7 +1323,7 @@ body {
 }
 
 /* ============================================================================
-   18. RESPONSIVE - Adaptación a diferentes tamaños de pantalla
+   19. RESPONSIVE - Adaptación a diferentes tamaños de pantalla
    ============================================================================
    
    Media queries para adaptar el diseño a tablets, móviles y pantallas pequeñas.
