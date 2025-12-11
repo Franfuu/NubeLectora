@@ -1,385 +1,250 @@
-# NubeLectora — Práctica 3.1 React (Componentes y Estado)
+# NubeLectora 📚
 
-![React](https://img.shields.io/badge/React-19-blue? logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-Enabled-3178C6?logo=typescript) ![Vite](https://img.shields.io/badge/Build-Vite-purple) ![Estado](https://img.shields.io/badge/Status-En%20Desarrollo-yellow)
+Aplicación React que gestiona una **biblioteca personal en la nube**. Permite ver un catálogo de libros, filtrarlos por estado de lectura, buscar por título o autor, añadir nuevos libros, eliminarlos y consultar el detalle de cada uno.
 
-**Desarrollado por:** Francisco Pérez
-**Asignatura:** Desarrollo Web en Entorno Cliente
-**Fecha:** Diciembre 2025
-**Repositorio:** [NubeLectora](https://github.com/Franfuu/NubeLectora)
+El proyecto está diseñado específicamente para la práctica:
 
----
-
-## Descripción General
-
-Aplicación React que simula una **plataforma de lectura en la nube**, permitiendo:
-
-- Buscar y seleccionar libros
-- Ver detalles completos (nombre, autores, reseña...)
-- Añadir libros con sistema de interacción
-- Interfaz responsive con componentes reutilizables
-- Experiencia de usuario fluida y moderna
-
-**Temática:** Biblioteca digital en la nube.
+> **Práctica 3.1. Diseño de una Aplicación React Basada en Componentes (Tema Libre)**
+> Centrada en **componentización, props, eventos y `useState`**.
 
 ---
 
-## ESTRUCTURA DEL PROYECTO
+## 1. Tecnologías usadas
 
+- React 19 + TypeScript
+- Vite 7 (dev server y build)
+- CSS plano (sin frameworks) en [src/App.css](src/App.css) y [src/index.css](src/index.css)
+- ESLint + TypeScript ESLint para calidad de código
+
+---
+
+## 2. Ejecución del proyecto
+
+### Requisitos previos
+
+- Node.js recomendado: >= 20
+- npm
+
+### Instalación de dependencias
+
+```bash
+npm install
 ```
-NubeLectora/
-│
-├── README.md                         ← Documentación completa
-├── package.json                      ← Dependencias del proyecto
-├── vite.config.ts                    ← Configuración de Vite
-├── tsconfig. json                     ← Configuración TypeScript
-│
-├── public/                           ← Recursos estáticos
-│
-├── src/
-│   ├── App.tsx                       [A1] Estado Global
-│   ├── main.tsx                      ← Punto de entrada
-│   │
-│   ├── components/
-│   │   ├── Layout/
-│   │   │   ├── Header. tsx
-│   │   │   ├── Footer.tsx            [A2] Sin props
-│   │   │   └── SearchBar.tsx         [A6] Callback
-│   │   │
-│   │   ├── Books/
-│   │   │   ├── BookList.tsx          [A7] Lista . map()
-│   │   │   ├── BookViewer. tsx        [A8] Panel Visor
-│   │   │   ├── BookCard.tsx          [A3a] Reutilizable
-│   │   │   └── BookMetadata. tsx
-│   │   │
-│   │   ├── Comments/
-│   │   │   ├── CommentForm.tsx       [A5] Formulario
-│   │   │   ├── CommentList.tsx       [B1] Estado Local
-│   │   │   └── CommentButton.tsx
-│   │   │
-│   │   └── Common/
-│   │       ├── Badge.tsx             [A3b] Reutilizable
-│   │       └── Button.tsx            [A4a] Props apariencia
-│   │
-│   ├── data/
-│   │   └── books.ts                  ← Mock Data
-│   │
-│   ├── types/
-│   │   ├── book.ts
-│   │   ├── comment.ts
-│   │   └── author.ts
-│   │
-│   └── styles/
-│       └── *.css
-│
-└── eslint. config.js
+
+### Entorno de desarrollo
+
+```bash
+npm run dev
+```
+
+Abre la URL que muestre Vite (normalmente `http://localhost:5173`).
+
+### Build de producción
+
+```bash
+npm run build
+```
+
+### Vista previa del build
+
+```bash
+npm run preview
 ```
 
 ---
 
-## Instalación y Ejecución
+## 3. Estructura principal
 
-1. **Clonar el repositorio:**
+- Componente raíz: [`App`](src/App.tsx)
+- Entrada de la app: [`main.tsx`](src/main.tsx)
+- HTML base: [`index.html`](index.html)
+- Estilos globales: [`index.css`](src/index.css)
+- Estilos de la app: [`App.css`](src/App.css)
+- Tipos y datos:
+  - Tipo libro: [`Libro`](src/types/libro.ts)
+  - Datos iniciales: [`librosIniciales`](src/data/libros.ts)
 
-   ```bash
-   git clone https://github.com/Franfuu/NubeLectora.git
-   cd NubeLectora
-   ```
-2. **Instalar dependencias:**
+Componentes en `src/components/`:
 
-   ```bash
-   npm install
-   ```
-3. **Arrancar servidor de desarrollo:**
-
-   ```bash
-   npm run dev
-   ```
-4. **Build para producción:**
-
-   ```bash
-   npm run build
-   ```
-5. **Preview del build:**
-
-   ```bash
-   npm run preview
-   ```
+- [`Header`](src/components/Header.tsx)
+- [`Footer`](src/components/Footer.tsx)
+- [`FormularioLibro`](src/components/FormularioLibro.tsx)
+- [`ListaLibros`](src/components/ListaLibros.tsx)
+- [`TarjetaLibro`](src/components/TarjetaLibro.tsx)
+- [`DetalleLibro`](src/components/DetalleLibro.tsx)
+- [`Filtros`](src/components/Filtros.tsx)
+- [`Estadisticas`](src/components/Estadisticas.tsx)
+- [`EtiquetaEstado`](src/components/EtiquetaEstado.tsx)
+- [`Button`](src/components/Button.tsx)
 
 ---
 
-## TECNOLOGÍAS UTILIZADAS
+## 4. Funcionalidades de la aplicación
 
-- **React 19** con Hooks (useState, useEffect)
-- **TypeScript 5.9** para tipado estático
-- **CSS3** con variables CSS dinámicas
-- **Vite 7** como bundler ultrarrápido
-- **ESLint 9** para linting y calidad de código
-- **SWC** para compilación rápida de React
+1. **Listado de libros**
 
----
+   - Se muestran en un **grid de tarjetas** usando [`ListaLibros`](src/components/ListaLibros.tsx) y [`TarjetaLibro`](src/components/TarjetaLibro.tsx).
+   - Datos iniciales definidos en [`librosIniciales`](src/data/libros.ts).
+2. **Filtros y búsqueda**
 
-## VERIFICACIÓN COMPLETA DE REQUISITOS — Práctica 3.1
+   - Componente [`Filtros`](src/components/Filtros.tsx):
+     - Búsqueda por **título** o **autor**.
+     - Filtros por estado: *Todos, Leídos, Leyendo, Pendientes*.
+   - El filtrado se aplica en [`App`](src/App.tsx) combinando:
+     - Estado `filtroEstado`
+     - Estado `busqueda`
+3. **Estadísticas de lectura**
 
-### ANÁLISIS DETALLADO POR REQUISITO
+   - Componente [`Estadisticas`](src/components/Estadisticas.tsx):
+     - Total de libros.
+     - Libros leídos, leyendo y pendientes.
+     - Barra de progreso con el porcentaje de libros leídos:
+       - $porcentajeLeidos = \dfrac{librosLeidos}{totalLibros} \cdot 100$
+4. **Añadir nuevos libros**
 
----
+   - Formulario controlado [`FormularioLibro`](src/components/FormularioLibro.tsx):
+     - Maneja todos los campos con `useState`.
+     - Envía el nuevo libro a [`App`](src/App.tsx) mediante la callback `onAgregarLibro`.
+5. **Eliminación de libros**
 
-### **A. COMPONENTES (Mínimo 8)**
+   - Botón de borrado en [`TarjetaLibro`](src/components/TarjetaLibro.tsx) que llama a `onDelete`.
+   - [`App`](src/App.tsx) implementa `eliminarLibro`, actualiza el estado y limpia el libro seleccionado si coincide.
+6. **Detalle de libro seleccionado**
 
-#### **A1. Componente Raíz (Estado Global)**
+   - Componente [`DetalleLibro`](src/components/DetalleLibro.tsx):
+     - Muestra portada grande, título, autor, año, estado, calificación y reseña.
+     - Se abre al seleccionar una tarjeta y se cierra con un botón reutilizable [`Button`](src/components/Button.tsx).
+7. **Etiquetas de estado reutilizables**
 
-**Requisito:** Un componente raíz App que controle el estado global que deba compartirse y coordine al resto.
-
-| **Aspecto**       | **Detalle**                                                |
-| ----------------------- | ---------------------------------------------------------------- |
-| **Componente**    | `App`                                                          |
-| **Archivo**       | `src/App.tsx`                                                  |
-| **Estado Global** | `const [selectedBook, setSelectedBook] = useState<number>(0);` |
-| **Distribución** | Pasa estado y setters a componentes hijos                        |
-| **Verificación** | Controla el libro seleccionado y coordina componentes            |
-
----
-
-#### **A2. Componente sin Props**
-
-**Requisito:** Al menos un componente sin props (footer, header estático, etc.)
-
-| **Aspecto**       | **Detalle**                          |
-| ----------------------- | ------------------------------------------ |
-| **Componente**    | `Footer`                                 |
-| **Archivo**       | `src/components/Layout/Footer.tsx`       |
-| **Props**         | Ninguno                                    |
-| **Contenido**     | Copyright estático y enlaces              |
-| **Verificación** | Renderizado puro sin dependencias externas |
+   - Componente [`EtiquetaEstado`](src/components/EtiquetaEstado.tsx):
+     - Se usa en [`TarjetaLibro`](src/components/TarjetaLibro.tsx) y [`DetalleLibro`](src/components/DetalleLibro.tsx).
+     - Pinta estilos diferentes según la prop `estado`.
 
 ---
 
-#### **A3. Componentes Reutilizables (Mínimo 3)**
+## 5. Relación con los requisitos de la práctica
 
-##### **A3a. BookCard**
+### A. Componentes (mínimo 8)
 
-- **Archivo:** `src/components/Books/BookCard.tsx`
-- **Uso:** Renderizado en lista y en visor detallado
-- **Verificación:** Reutilizado en múltiples contextos
+1. **Componente raíz App**
 
-##### **A3b.  Badge**
+   - [`App`](src/App.tsx): controla el estado global (`libros`, `libroSeleccionado`, `filtroEstado`, `busqueda`) y coordina a todos los componentes.
+2. **Componentes sin props**
 
-- **Archivo:** `src/components/Common/Badge. tsx`
-- **Uso:** Etiquetas de género, estado, categorías
-- **Verificación:** Usado múltiples veces en diferentes componentes
+   - [`Header`](src/components/Header.tsx): encabezado estático con logo y título.
+   - [`Footer`](src/components/Footer.tsx): pie de página estático.
+3. **Componentes reutilizables (usados varias veces)**
 
-##### **A3c. Button**
+   - [`TarjetaLibro`](src/components/TarjetaLibro.tsx)
+     - Se usa N veces dentro de [`ListaLibros`](src/components/ListaLibros.tsx) con `.map`.
+   - [`Button`](src/components/Button.tsx)
+     - Botón genérico con variación de color (`color`) y texto (`texto`), usado por ejemplo en [`DetalleLibro`](src/components/DetalleLibro.tsx).
+   - [`EtiquetaEstado`](src/components/EtiquetaEstado.tsx)
+     - Reutilizado en [`TarjetaLibro`](src/components/TarjetaLibro.tsx) y [`DetalleLibro`](src/components/DetalleLibro.tsx) con distintas props.
+4. **Componentes que reciben props para personalizar apariencia o contenido**
 
-- **Archivo:** `src/components/Common/Button. tsx`
-- **Uso:** Botones de acción en toda la aplicación
-- **Verificación:** Componente reutilizable universal
+   - [`Button`](src/components/Button.tsx)
+     - Props: `texto`, `color`, `onClick`.
+   - [`Estadisticas`](src/components/Estadisticas.tsx)
+     - Props: `libros`, `mostrarTotalLeidos` (permite personalizar contenido).
+   - [`EtiquetaEstado`](src/components/EtiquetaEstado.tsx)
+     - Prop: `estado` → cambia color y texto.
+   - [`TarjetaLibro`](src/components/TarjetaLibro.tsx)
+     - Prop opcional `mostrarDetalles` para mostrar/ocultar información extendida.
+5. **Componente formulario controlado**
 
----
+   - [`FormularioLibro`](src/components/FormularioLibro.tsx)
+     - Usa `useState` para todos los campos del formulario (título, autor, portada, año, estado, reseña, calificación).
+     - Todos los inputs son controlados (`value` + `onChange`).
+     - Envía los datos mediante el callback `onAgregarLibro`.
+6. **Componentes que reciben funciones callback para cambiar state (comunicación hijo → padre)**
 
-#### **A4. Props para Personalizar Apariencia (Mínimo 2)**
+   - [`FormularioLibro`](src/components/FormularioLibro.tsx) → `onAgregarLibro`
+   - [`ListaLibros`](src/components/ListaLibros.tsx) → `onSelectLibro`, `onDeleteLibro`
+   - [`TarjetaLibro`](src/components/TarjetaLibro.tsx) → `onSelect`, `onDelete`
+   - [`Filtros`](src/components/Filtros.tsx) → `onFiltrarEstado`, `onBuscar`
+   - [`DetalleLibro`](src/components/DetalleLibro.tsx) → `onClose`
 
-##### **A4a. Button**
+   Todas estas callbacks se definen en [`App`](src/App.tsx) y se pasan por props.
+7. **Componente que muestra una lista de elementos**
 
-```typescript
-interface ButtonProps {
-  variant?:  "primary" | "secondary" | "danger";
-  size?: "small" | "medium" | "large";
-  children: React. ReactNode;
-}
-```
+   - [`ListaLibros`](src/components/ListaLibros.tsx)
+     - Renderiza múltiples [`TarjetaLibro`](src/components/TarjetaLibro.tsx) con `.map`.
+     - Gestiona el mensaje de lista vacía.
+8. **Componente visor / panel de información de un elemento seleccionado**
 
-**Verificación:** Personaliza color y tamaño
-
-##### **A4b. BookCard**
-
-```typescript
-interface BookCardProps {
-  book: Book;
-  layout?: "vertical" | "horizontal";
-  showDetails?: boolean;
-}
-```
-
-**Verificación:** Personaliza disposición y visibilidad de elementos
-
----
-
-#### **A5. Formulario Controlado**
-
-**Componente:** `CommentForm`
-**Archivo:** `src/components/Comments/CommentForm. tsx`
-
-```typescript
-const [username, setUsername] = useState("");
-const [comment, setComment] = useState("");
-
-function handleSubmit(e: FormEvent) {
-  e.preventDefault();
-  if (username.trim() && comment.trim()) {
-    onSubmit(username, comment);
-    setUsername("");
-    setComment("");
-  }
-}
-```
-
-**Verificación:** Inputs controlados con validación
+   - [`DetalleLibro`](src/components/DetalleLibro.tsx)
+     - Muestra la información detallada del `libroSeleccionado`.
+     - Se renderiza en el panel derecho definido desde [`App`](src/App.tsx).
 
 ---
 
-#### **A6. Callback al Padre**
+### B. Estados (`useState`)
 
-**Componente:** `SearchBar`
-**Archivo:** `src/components/Layout/SearchBar.tsx`
+1. **Estados locales independientes (mínimo 2 componentes)**
 
-```typescript
-interface SearchBarProps {
-  onBookSelect: (bookId:  number) => void;
-  books: Book[];
-}
+   - [`FormularioLibro`](src/components/FormularioLibro.tsx)
+     - Varios estados locales: `titulo`, `autor`, `portada`, `año`, `estado`, `resena`, `calificacion`.
+   - [`Filtros`](src/components/Filtros.tsx)
+     - Estado local `estadoActivo` para saber qué botón de filtro está marcado visualmente.
+   - Ambos estados son **independientes** del estado global de [`App`](src/App.tsx).
+2. **Estado compartido entre varios componentes**
 
-function SearchBar({ onBookSelect, books }: SearchBarProps) {
-  const handleSelect = (id: number) => {
-    onBookSelect(id); // Modifica estado del padre
-  };
-  // ...  
-}
-```
+   En [`App`](src/App.tsx):
 
-**Verificación:** Modifica estado padre mediante callback
+   - `libros: Libro[]`
 
----
+     - **Leído por**:
+       - [`ListaLibros`](src/components/ListaLibros.tsx) (muestra la lista filtrada).
+       - [`Estadisticas`](src/components/Estadisticas.tsx) (calcula métricas).
+       - [`DetalleLibro`](src/components/DetalleLibro.tsx) de forma indirecta, vía `libroSeleccionado`.
+     - **Modificado por**:
+       - [`FormularioLibro`](src/components/FormularioLibro.tsx) → callback `agregarLibro`.
+       - [`TarjetaLibro`](src/components/TarjetaLibro.tsx) → callback `eliminarLibro` (pasando por [`ListaLibros`](src/components/ListaLibros.tsx)).
+   - `libroSeleccionado: Libro | null`
 
-#### **A7. Renderizado de Listas (. map)**
+     - **Leído por**:
+       - [`DetalleLibro`](src/components/DetalleLibro.tsx), que muestra el panel de detalle.
+     - **Modificado por**:
+       - [`TarjetaLibro`](src/components/TarjetaLibro.tsx) → callback `seleccionarLibro`.
+       - Botón de cerrar de [`DetalleLibro`](src/components/DetalleLibro.tsx) → `onClose`.
+   - `filtroEstado` y `busqueda`
 
-**Componente:** `BookList`
-**Archivo:** `src/components/Books/BookList.tsx`
+     - **Leídos por**:
+       - [`App`](src/App.tsx) para calcular `librosFiltrados`.
+     - **Modificados por**:
+       - [`Filtros`](src/components/Filtros.tsx) mediante `onFiltrarEstado` y `onBuscar`.
 
-```typescript
-function BookList({ books }: BookListProps) {
-  return (
-    <div className="book-list">
-      {books.map((book) => (
-        <BookCard 
-          key={book.id} 
-          book={book} 
-          layout="vertical"
-        />
-      ))}
-    </div>
-  );
-}
-```
-
-**Verificación:** . map() con keys correctas
+   Se cumple así el requisito de que **un mismo estado afecta a varios componentes**, y se **modifica siempre mediante callbacks** enviadas desde `App`.
 
 ---
 
-#### **A8. Panel Visor/Detalle**
+### C. Reutilización de componentes
 
-**Componente:** `BookViewer`
-**Archivo:** `src/components/Books/BookViewer.tsx`
+- [`TarjetaLibro`](src/components/TarjetaLibro.tsx)
+  - Usada **N veces** en [`ListaLibros`](src/components/ListaLibros.tsx), una por cada libro del array.
+- [`EtiquetaEstado`](src/components/EtiquetaEstado.tsx)
+  - Reutilizada en:
+    - [`TarjetaLibro`](src/components/TarjetaLibro.tsx)
+    - [`DetalleLibro`](src/components/DetalleLibro.tsx)
+- [`Button`](src/components/Button.tsx)
+  - Botón **genérico** parametrizable (`texto`, `color`, `onClick`), usado en el visor de detalle y reutilizable en cualquier otra parte.
 
-```typescript
-function BookViewer({ book }: BookViewerProps) {
-  return (
-    <article className="book-viewer">
-      <BookMetadata book={book} />
-      <Synopsis text={book. synopsis} />
-      <AuthorInfo author={book.author} />
-      <CommentList comments={book.comments} />
-    </article>
-  );
-}
-```
-
-**Verificación:** Panel completo de detalles del libro seleccionado
+Esto demuestra la **reutilización real** de componentes con diferentes props y en contextos distintos.
 
 ---
 
-### **B. GESTIÓN DE ESTADOS (useState)**
+## 6. Tipo de datos `Libro` y datos iniciales
 
-#### **B1. Estados Locales (Mínimo 2)**
-
-1. **SearchBar:** `searchTerm:  string`
-2. **CommentForm:** `username: string`, `comment: string`
-3. **CommentButton:** `isLiked: boolean`, `count: number`
-4. **CommentList:** `comments: Comment[]`
-
-**Verificación:** 4+ estados locales independientes
+- El tipo principal de la aplicación es [`Libro`](src/types/libro.ts), que define:
+  - `id`, `titulo`, `autor`, `portada`, `año`, `estado`, `resena`, `calificacion`.
+- Los datos de ejemplo están en [`librosIniciales`](src/data/libros.ts) y se usan como estado inicial de `libros` en [`App`](src/App.tsx).
 
 ---
 
-#### **B2. Estado Compartido (Lifting State Up)**
+## 7. Posibles mejoras futuras
 
-```typescript
-// App.tsx
-const [selectedBook, setSelectedBook] = useState<number>(0);
-
-return (
-  <>
-    <Header onBookSelect={setSelectedBook} /> {/* Escritura */}
-    <BookViewer book={books[selectedBook]} /> {/* Lectura */}
-    <Sidebar book={books[selectedBook]} />    {/* Lectura */}
-  </>
-);
-```
-
-**Verificación:** Estado compartido entre múltiples componentes
-
----
-
-## RESUMEN DE CUMPLIMIENTO
-
-```
-┌────────────────────────────────────────────────────────────┐
-│ PRÁCTICA 3.1 — CUMPLIMIENTO COMPLETO                       │
-├────────────────────────────────────────────────────────────┤
-│                                                            │
-│ A. COMPONENTES (Mínimo 8)                                  │
-│    A1. App raíz                                            │
-│    A2. Componente sin props (Footer)                       │
-│    A3. Componentes reutilizables (×3)                      │
-│    A4. Props de personalización (×2)                       │
-│    A5. Formulario controlado                               │
-│    A6. Callback al padre                                   │
-│    A7. Lista con .map()                                    │
-│    A8. Panel visor                                         │
-│                                                            │
-│ B. ESTADOS (useState)                                      │
-│    B1. Estados locales (×4+)                               │
-│    B2. Estado compartido + callbacks                       │
-│                                                            │
-│ C. EXTRAS                                                  │
-│    - TypeScript para type safety                           │
-│    - ESLint configurado                                    │
-│    - Estructura escalable                                  │
-│    - Diseño responsive                                     │
-│                                                            │
-└────────────────────────────────────────────────────────────┘
-```
-
----
-
-## Autor
-
-**Franfuu**
-GitHub: [@Franfuu](https://github.com/Franfuu)
-
----
-
-## Licencia
-
-Este proyecto es parte de una práctica académica para la asignatura de Desarrollo Web en Entorno Cliente.
-
----
-
-## Agradecimientos
-
-- Profesorado de Desarrollo Web en Entorno Cliente
-- Comunidad de React y TypeScript
-- Documentación oficial de Vite
-
----
-
-**Gracias por revisar NubeLectora!**
+- Persistencia en `localStorage`.
+- Edición de libros existentes.
+- Ordenación por año, autor o calificación.
+- Más vistas (lista compacta, tabla, etc.).
