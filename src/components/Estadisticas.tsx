@@ -3,6 +3,7 @@ import type { Libro } from '../types/libro';
 
 interface EstadisticasProps {
   libros: Libro[];
+  mostrarTotalLeidos?: boolean;
 }
 
 /**
@@ -26,7 +27,7 @@ interface EstadisticasProps {
  * PATRÓN: Presentational Component (solo lectura)
  * COMUNICACIÓN: Padre -> Hijo mediante props
  */
-const Estadisticas = ({ libros }: EstadisticasProps) => {
+const Estadisticas = ({ libros, mostrarTotalLeidos = true }: EstadisticasProps) => {
   // ============================================================================
   // CÁLCULOS DINÁMICOS BASADOS EN LA PROP RECIBIDA
   // ============================================================================
@@ -55,11 +56,12 @@ const Estadisticas = ({ libros }: EstadisticasProps) => {
       {/* Muestra 4 tarjetas con las estadísticas calculadas */}
       <div className="stats-grid">
         {/* Tarjeta: Total de libros */}
+        {mostrarTotalLeidos && (
         <div className="stat-item">
           <span className="stat-numero">{totalLibros}</span>
           <span className="stat-label">Total</span>
         </div>
-        
+         )}
         {/* Tarjeta: Libros leídos */}
         <div className="stat-item">
           <span className="stat-numero">{librosLeidos}</span>

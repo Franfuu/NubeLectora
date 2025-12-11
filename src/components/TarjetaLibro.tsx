@@ -6,6 +6,7 @@ interface PropsTarjeta {
   libro: Libro;
   onSelect: (id: number) => void;
   onDelete: (id: number) => void;
+  mostrarDetalles?: boolean; // ✅ NUEVO: controla si se muestran autor/estado/calificación
 }
 
 /**
@@ -23,6 +24,7 @@ interface PropsTarjeta {
  *   1. libro: objeto con toda la información del libro
  *   2. onSelect: función callback para seleccionar el libro
  *   3. onDelete: función callback para eliminar el libro
+ *   4. mostrarDetalles (opcional): muestra/oculta información extendida
  * - Muestra información completa del libro: portada, título, autor, estado, calificación
  * - Usa el componente reutilizable EtiquetaEstado internamente
  * - Gestiona eventos de click (seleccionar y eliminar)
@@ -35,7 +37,7 @@ interface PropsTarjeta {
  * 
  * ESTILOS: Todos los estilos están definidos en App.css (clase .tarjeta-libro)
  */
-function TarjetaLibro({ libro, onSelect, onDelete }: PropsTarjeta) {
+function TarjetaLibro({ libro, onSelect, onDelete, mostrarDetalles = true }: PropsTarjeta) {
   /**
    * Maneja el click en la tarjeta para seleccionar el libro
    * ✅ Utiliza el callback recibido para comunicar al padre
@@ -58,8 +60,8 @@ function TarjetaLibro({ libro, onSelect, onDelete }: PropsTarjeta) {
     <div className="tarjeta-libro" onClick={handleClick}>
       {/* ========== BOTÓN ELIMINAR ========== */}
       {/* Visible solo al hacer hover sobre la tarjeta (CSS: .tarjeta-libro:hover .btn-delete) */}
-      <button 
-        className="btn-delete" 
+      <button
+        className="btn-delete"
         onClick={handleDelete}
         title="Eliminar libro"
       >
@@ -69,30 +71,38 @@ function TarjetaLibro({ libro, onSelect, onDelete }: PropsTarjeta) {
       {/* ========== PORTADA DEL LIBRO ========== */}
       {/* Estilos en App.css (.tarjeta-libro img) */}
       <img src={libro.portada} alt={libro.titulo} />
-      
+
       {/* ========== TÍTULO DEL LIBRO ========== */}
       {/* Estilos en App.css (.tarjeta-libro h3) */}
       <h3>{libro.titulo}</h3>
-      
+
+
       {/* ========== AUTOR DEL LIBRO ========== */}
-      {/* Estilos en App.css (.tarjeta-libro .autor) */}
-      <p className="autor">{libro.autor}</p>
-      
-      {/* ========== ETIQUETA DE ESTADO ========== */}
+          {/* Estilos en App.css (.tarjeta-libro .autor) */}
+          <p className="autor">{libro.autor}</p>
       {/* 
-        ✅ REQUISITO C: Uso de componente reutilizable EtiquetaEstado
-        Se pasa el estado del libro como prop
-        Estilos en App.css (.badge, .badge-leido, .badge-leyendo, .badge-pendiente)
+        🔽 Bloque opcional controlado por mostrarDetalles
+        Si mostrarDetalles es false, se ocultan estado y calificación
       */}
-      <EtiquetaEstado estado={libro.estado} />
-      
-      {/* ========== CALIFICACIÓN (OPCIONAL) ========== */}
-      {/* Solo se muestra si el libro tiene calificación */}
-      {/* Estilos en App.css (.tarjeta-libro .calificacion) */}
-      {libro.calificacion && (
-        <div className="calificacion">
-          {'⭐'.repeat(libro.calificacion)} {/* Repite ⭐ según la calificación */}
-        </div>
+      {mostrarDetalles && (
+        <>
+          {/* ========== ETIQUETA DE ESTADO ========== */}
+          {/* 
+            ✅ REQUISITO C: Uso de componente reutilizable EtiquetaEstado
+            Se pasa el estado del libro como prop
+            Estilos en App.css (.badge, .badge-leido, .badge-leyendo, .badge-pendiente)
+          */}
+          <EtiquetaEstado estado={libro.estado} />
+
+          {/* ========== CALIFICACIÓN (OPCIONAL) ========== */}
+          {/* Solo se muestra si el libro tiene calificación */}
+          {/* Estilos en App.css (.tarjeta-libro .calificacion) */}
+          {libro.calificacion && (
+            <div className="calificacion">
+              {"⭐".repeat(libro.calificacion)}
+            </div>
+          )}
+        </>
       )}
     </div>
   );

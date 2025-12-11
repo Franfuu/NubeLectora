@@ -60,7 +60,6 @@ function App() {
   const [busqueda, setBusqueda] = useState('');
 
   // ============================================================================
-
   // FUNCIONES CALLBACK PARA COMUNICACIÓN CON COMPONENTES HIJOS
   // ============================================================================
 
@@ -124,7 +123,6 @@ function App() {
         ============================================================================
         ✅ REQUISITO A: Componente sin props (Header)
         ============================================================================
-
         Header no recibe ninguna prop, es completamente estático
       */}
       <Header />
@@ -140,7 +138,6 @@ function App() {
             ✅ REQUISITO A: Componente que recibe callback (onAgregarLibro)
             ✅ REQUISITO B.1: Componente con estado local (useState para todos los inputs)
             ============================================================================
-
             FormularioLibro cumple con:
             - Usa useState internamente para: titulo, autor, portada, año, estado, resena, calificacion
             - Recibe la función agregarLibro como callback para modificar el estado del padre
@@ -155,20 +152,17 @@ function App() {
             ============================================================================
             ✅ REQUISITO A: Componente que recibe props para personalizar contenido
             ============================================================================
-
             Estadisticas cumple con:
             - Recibe el estado compartido 'libros' como prop
             - Calcula y muestra estadísticas basadas en los datos recibidos
             - Personaliza su contenido según la prop recibida
           */}
           <Estadisticas libros={libros} />
-
           {/* 
             ============================================================================
             ✅ REQUISITO A: Componente que recibe callbacks
             ✅ REQUISITO B.1: Componente con estado local (estadoActivo)
             ============================================================================
-
             Filtros cumple con:
             - Recibe callbacks (setFiltroEstado, setBusqueda) para modificar estado del padre
             - Tiene su propio estado local 'estadoActivo' independiente
@@ -184,7 +178,6 @@ function App() {
             ✅ REQUISITO A: Componente que muestra lista de elementos
             ✅ REQUISITO A: Componente que recibe callbacks
             ============================================================================
-
             ListaLibros cumple con:
             - Renderiza múltiples veces el componente LibroCard usando .map()
             - Recibe callbacks para comunicar eventos (seleccionar, eliminar)
@@ -202,7 +195,6 @@ function App() {
           ============================================================================
           ✅ REQUISITO A: Panel de información de elemento seleccionado
           ============================================================================
-
           DetalleLibro cumple con:
           - Actúa como "visor" del elemento seleccionado por el usuario
           - Lee el estado compartido 'libroSeleccionado'
@@ -223,10 +215,8 @@ function App() {
 
       {/* 
         ============================================================================
-
         ✅ REQUISITO A: Componente sin props (Footer)
         ============================================================================
-
         Footer no recibe ninguna prop, es completamente estático
       */}
       <Footer />
