@@ -1,20 +1,5 @@
 import type { Libro } from "../types/libro";
-/**
- * ============================================================================
- * DATOS INICIALES: Libros de ejemplo
- * ============================================================================
- * 
- * Array de libros precargados que se usa como estado inicial en App.tsx
- * Contiene 20 libros de diferentes géneros, autores y estados de lectura
- * 
- * ✅ Permite demostrar todas las funcionalidades de la aplicación desde el inicio:
- * - Visualización en grid
- * - Filtrado por estado (leídos, leyendo, pendientes)
- * - Búsqueda por título o autor
- * - Estadísticas con datos reales
- * - Selección y vista de detalles
- * - Diferentes calificaciones y reseñas
- */
+
 export const librosIniciales: Libro[] = [
   {
     id: 1,
@@ -39,7 +24,6 @@ export const librosIniciales: Libro[] = [
     id: 3,
     titulo: "El Quijote",
     autor: "Miguel de Cervantes",
-    // Link cambiado a una edición verificada (Edición RAE)
     portada: "https://covers.openlibrary.org/b/id/12653139-L.jpg",
     año: 1605,
     estado: "leyendo",
@@ -102,7 +86,6 @@ export const librosIniciales: Libro[] = [
     id: 10,
     titulo: "La Sombra del Viento",
     autor: "Carlos Ruiz Zafón",
-    // Link cambiado a la portada clásica oscura
     portada: "https://covers.openlibrary.org/b/id/10523497-L.jpg",
     año: 2001,
     estado: "leido",
