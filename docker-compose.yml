@@ -1,6 +1,7 @@
 services:
   api:
     build: ./backend
+    container_name: nubelectora-api
     ports:
       - "3000:3000"
     volumes:
@@ -8,3 +9,13 @@ services:
     environment:
       - PORT=3000
       - JWT_SECRET=mi-codigo-secreto
+
+  frontend:
+    build: .
+    container_name: nubelectora-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+    environment:
+      - VITE_API_URL=http://localhost:3000

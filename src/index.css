@@ -1,60 +1,137 @@
+/**
+ * ============================================================================
+ * ESTILOS BASE DE NUBELELECTORA
+ * ============================================================================
+ * 
+ * 🎨 PALETA DE COLORES PREMIUM:
+ * - Burdeos: #800020, #A00028
+ * - Negro: #0D0D0D, #1A1A1A, #262626
+ * - Blanco: #FFFFFF
+ * - Grises: #E0E0E0, #B0B0B0, #7A7A7A
+ */
+
+/* Reset universal */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Configuración del body */
 body {
   margin: 0;
   padding: 0;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0D0D0D;
+  color: #FFFFFF;
+  line-height: 1.6;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* Títulos */
+h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #FFFFFF;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+/* Enlaces */
+a {
+  color: #A00028;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #C00030;
+}
+
+/* Botones base */
+button {
+  border-radius: 8px;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  background-color: #800020;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #A00028;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(128, 0, 32, 0.5);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 2px solid #800020;
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Inputs base */
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  background: #1A1A1A;
+  border: 1px solid #262626;
+  border-radius: 8px;
+  padding: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #800020;
+  box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.2);
+  background: #262626;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1A1A1A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #800020;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A00028;
 }

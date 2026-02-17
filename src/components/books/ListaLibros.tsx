@@ -1,13 +1,12 @@
 import TarjetaLibro from './TarjetaLibro';
-import type { Libro } from '../types/libro';
+import type { Libro } from '../../types/libro';
 
 interface ListaLibrosProps {
   libros: Libro[];
   onSelectLibro: (id: number) => void;
-  onDeleteLibro: (id: number) => void;
 }
 
-const ListaLibros = ({ libros, onSelectLibro, onDeleteLibro }: ListaLibrosProps) => {
+const ListaLibros = ({ libros, onSelectLibro }: ListaLibrosProps) => {
   if (libros.length === 0) {
     return (
       <div className="lista-vacia">
@@ -23,7 +22,6 @@ const ListaLibros = ({ libros, onSelectLibro, onDeleteLibro }: ListaLibrosProps)
           key={libro.id}
           libro={libro}
           onSelect={onSelectLibro}
-          onDelete={onDeleteLibro}
           mostrarDetalles={true}
         />
       ))}
