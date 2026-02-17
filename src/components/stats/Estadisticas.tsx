@@ -1,4 +1,5 @@
-import type { Libro } from '../types/libro';
+import type { Libro } from '../../types/libro';
+import { BarChart3 } from 'lucide-react';
 
 interface EstadisticasProps {
   libros: Libro[];
@@ -14,7 +15,10 @@ const Estadisticas = ({ libros, mostrarTotalLeidos = true }: EstadisticasProps) 
 
   return (
     <div className="estadisticas">
-      <h3>Estadísticas</h3>
+      <h3>
+        <BarChart3 size={24} strokeWidth={2} />
+        Estadísticas
+      </h3>
       
       <div className="stats-grid">
         {mostrarTotalLeidos && (

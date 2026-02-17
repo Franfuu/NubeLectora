@@ -11,6 +11,18 @@
       "email": "admin@gmail.com",
       "name": "admin",
       "passwordHash": "$2b$10$Cogpy13OblVHxzHz.wIOle5H2.wGs2oEAES5UBJqalF0lMfj1BVRq"
+    },
+    {
+      "id": 3,
+      "email": "ff@gmail.com",
+      "name": "Fran",
+      "passwordHash": "$2b$10$aePLoLrFe24UyXQe0JClMefC4/k8jyrUsgNBI5OKJaHf2y/bGrtxW"
+    },
+    {
+      "id": 4,
+      "email": "rafa@gmail.com",
+      "name": "Rafa",
+      "passwordHash": "$2b$10$xpt7sE5umCgqrhiu3RSI4OeuoZ1udoPxeAnyEVNx5KUF74zHG4WLS"
     }
   ],
   "libros": [
@@ -212,6 +224,38 @@
       "estado": "leyendo",
       "calificacion": 5,
       "userId": 2
+    },
+    {
+      "id": 21,
+      "titulo": "Cien años de soledad",
+      "autor": "Gabriel Garcia",
+      "portada": "https://covers.openlibrary.org/b/isbn/9780307474728-L.jpg",
+      "año": 2005,
+      "estado": "pendiente",
+      "userId": 3,
+      "resena": "Increible",
+      "calificacion": 5
+    },
+    {
+      "id": 22,
+      "titulo": "Niger",
+      "autor": "Nige",
+      "portada": "https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg",
+      "año": 1984,
+      "estado": "leyendo",
+      "userId": 4,
+      "calificacion": 3
+    },
+    {
+      "id": 23,
+      "titulo": "Cien años de soledad",
+      "autor": "Gabriel Garcia",
+      "portada": "https://covers.openlibrary.org/b/isbn/9780307474728-L.jpg",
+      "año": 2005,
+      "estado": "leido",
+      "userId": 4,
+      "resena": "Me encanta\n",
+      "calificacion": 3
     }
   ]
 }

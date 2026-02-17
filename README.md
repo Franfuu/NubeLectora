@@ -1,250 +1,387 @@
-# NubeLectora 📚
+# 📚 NubeLectora
 
-Aplicación React que gestiona una **biblioteca personal en la nube**. Permite ver un catálogo de libros, filtrarlos por estado de lectura, buscar por título o autor, añadir nuevos libros, eliminarlos y consultar el detalle de cada uno.
+**NubeLectora** es una aplicación web para gestionar tu biblioteca personal en la nube. Permite organizar, rastrear y calificar tus libros con una interfaz moderna y funcional.
 
-El proyecto está diseñado específicamente para la práctica:
+## 👨‍💻 Autor
 
-> **Práctica 3.1. Diseño de una Aplicación React Basada en Componentes (Tema Libre)**
-> Centrada en **componentización, props, eventos y `useState`**.
-
----
-
-## 1. Tecnologías usadas
-
-- React 19 + TypeScript
-- Vite 7 (dev server y build)
-- CSS plano (sin frameworks) en [src/App.css](src/App.css) y [src/index.css](src/index.css)
-- ESLint + TypeScript ESLint para calidad de código
+**Francisco Pérez**
+Ciclo Superior - Entorno Cliente
+Curso: 2025/2026
 
 ---
 
-## 2. Ejecución del proyecto
+## 📝 Descripción
+
+Aplicación frontend desarrollada con **React + TypeScript** que se comunica con un backend mediante una **API REST**. Permite realizar operaciones CRUD completas sobre libros, con autenticación JWT y rutas protegidas.
+
+### Características principales
+
+- ✅ Gestión completa de libros (CRUD)
+- ✅ Autenticación con JWT
+- ✅ Rutas públicas y privadas
+- ✅ Página 404 para rutas inexistentes
+- ✅ Filtrado y búsqueda de libros
+- ✅ Estadísticas de lectura
+- ✅ Interfaz responsive y moderna
+- ✅ Estados de carga y error
+- ✅ Persistencia de sesión
+
+---
+
+## 🚀 Instalación
 
 ### Requisitos previos
 
-- Node.js recomendado: >= 20
-- npm
+- **Node.js** (v18 o superior)
+- **npm** o **yarn**
 
-### Instalación de dependencias
+### Pasos de instalación
+
+1. **Clonar el repositorio**
+
+```bash
+git clone https://github.com/tu-usuario/nubelectora.git
+cd NubeLectora
+```
+
+2. **Instalar dependencias del frontend**
 
 ```bash
 npm install
 ```
 
-### Entorno de desarrollo
+3. **Instalar dependencias del backend**
+
+```bash
+cd backend
+npm install
+cd ..
+```
+
+4. **Configurar variables de entorno**
+
+Crea un archivo `.env` en la raíz del proyecto (puedes copiar `.env.example`):
+
+```env
+VITE_API_URL=http://localhost:3000
+```
+
+5. **Iniciar la aplicación**
+
+**Opción A: Con Docker (Recomendado) - Frontend + Backend**
+
+Si tienes Docker instalado, puedes iniciar **ambos servicios** con un solo comando:
+
+```bash
+docker-compose up
+```
+
+O en modo detached (segundo plano):
+
+```bash
+docker-compose up -d
+```
+
+Para detener los contenedores:
+
+```bash
+docker-compose down
+```
+
+Esto lanzará:
+
+- **Backend (API)**: `http://localhost:3000`
+- **Frontend**: `http://localhost:5173`
+
+**Opción B: Con Node.js (desarrollo manual)**
+
+Terminal 1 - Backend:
+
+```bash
+cd backend
+node server.js
+```
+
+Terminal 2 - Frontend:
 
 ```bash
 npm run dev
 ```
 
-Abre la URL que muestre Vite (normalmente `http://localhost:5173`).
+El backend se ejecutará en `http://localhost:3000`
+El frontend se ejecutará en `http://localhost:5173`
 
-### Build de producción
+---
+
+## 🐳 Ejecutar con Docker
+
+El proyecto incluye configuración de Docker Compose para ejecutar **frontend y backend** simultáneamente:
+
+### Requisitos
+
+- Docker Desktop instalado ([Descargar aquí](https://www.docker.com/products/docker-desktop))
+
+### Contenedores incluidos
+
+1. **nubelectora-api** (puerto 3000)
+
+   - Backend con Express + JSON Server
+   - Base de datos JSON persistente
+2. **nubelectora-frontend** (puerto 5173)
+
+   - Frontend React con Vite
+   - Build optimizado para producción
+
+### Comandos útiles
 
 ```bash
-npm run build
+# Iniciar frontend y backend a la vez
+docker-compose up
+
+# Iniciar en segundo plano
+docker-compose up -d
+
+# Ver logs de ambos servicios
+docker-compose logs -f
+
+# Ver logs de un servicio específico
+docker-compose logs -f frontend
+docker-compose logs -f api
+
+# Detener todos los servicios
+docker-compose down
+
+# Reconstruir las imágenes (después de cambios)
+docker-compose up --build
+
+# Reconstruir solo un servicio
+docker-compose build frontend
+docker-compose up -d frontend
+
+# Detener y eliminar volúmenes
+docker-compose down -v
 ```
 
-### Vista previa del build
+### Ventajas de usar Docker
+
+- ✅ No necesitas instalar Node.js localmente
+- ✅ Entorno consistente en todos los sistemas
+- ✅ **Inicia frontend y backend con un solo comando**
+- ✅ Fácil de iniciar y detener
+- ✅ Los datos se persisten en `backend/db.json`
+- ✅ Build de producción con Vite preview
+
+---
+
+## 👤 Usuarios de prueba
+
+El backend incluye dos usuarios precargados:
+
+| Email                 | Contraseña  | Rol               |
+| --------------------- | ------------ | ----------------- |
+| `usuario@gmail.com` | `password` | Usuario estándar |
+| `admin@gmail.com`   | `password` | Administrador     |
+
+Cada usuario tiene su propia colección de libros.
+
+---
+
+## 🏗️ Estructura del proyecto
+
+```
+NubeLectora/
+├── backend/                 # Backend con Express + JSON Server
+│   ├── db.json             # Base de datos
+│   ├── db.json.dist        # Plantilla de base de datos
+│   ├── server.js           # Servidor API REST
+│   └── package.json        # Dependencias del backend
+├── src/
+│   ├── auth/               # Contexto y almacenamiento de autenticación
+│   │   ├── authContext.tsx
+│   │   └── authStorage.ts
+│   ├── components/         # Componentes reutilizables
+│   │   ├── Button.tsx
+│   │   ├── DetalleLibro.tsx
+│   │   ├── Estadisticas.tsx
+│   │   ├── EtiquetaEstado.tsx
+│   │   ├── Filtros.tsx
+│   │   ├── Footer.tsx
+│   │   ├── FormularioLibro.tsx
+│   │   ├── Header.tsx
+│   │   ├── ListaLibros.tsx
+│   │   └── TarjetaLibro.tsx
+│   ├── pages/              # Páginas de la aplicación
+│   │   ├── Home.tsx
+│   │   ├── Login.tsx
+│   │   ├── Register.tsx
+│   │   ├── LibrosPage.tsx
+│   │   ├── DetalleLibroPage.tsx
+│   │   └── NotFound.tsx
+│   ├── routing/            # Componentes de enrutamiento
+│   │   └── PrivateRoute.tsx
+│   ├── services/           # Servicios de API
+│   │   ├── apiClient.ts
+│   │   ├── authService.ts
+│   │   └── librosService.ts
+│   ├── types/              # Tipos TypeScript
+│   │   ├── Auth.ts
+│   │   └── libro.ts
+│   ├── App.tsx             # Componente raíz con rutas
+│   └── main.tsx            # Punto de entrada
+├── .env                    # Variables de entorno
+├── package.json            # Dependencias del frontend
+└── README.md              # Este archivo
+```
+
+---
+
+## 🛣️ Rutas de la aplicación
+
+### Rutas públicas (accesibles sin autenticación)
+
+- `/` - Página de inicio/presentación
+- `/login` - Página de inicio de sesión
+- `/register` - Página de registro de nuevos usuarios
+
+### Rutas privadas (requieren autenticación)
+
+- `/libros` - Lista de libros del usuario
+- `/libros/:id` - Detalle de un libro específico
+
+### Ruta de error
+
+- `*` - Página 404 para rutas inexistentes
+
+---
+
+## 🔌 API Endpoints
+
+El backend proporciona los siguientes endpoints:
+
+### Autenticación
+
+- `POST /auth/login` - Iniciar sesión
+- `POST /auth/register` - Registrar usuario
+- `GET /auth/me` - Obtener usuario actual (requiere JWT)
+
+### Libros (requieren JWT)
+
+- `GET /libros` - Obtener todos los libros del usuario
+- `GET /libros/:id` - Obtener un libro específico
+- `POST /libros` - Crear un nuevo libro
+- `PATCH /libros/:id` - Actualizar un libro (parcial)
+- `PUT /libros/:id` - Actualizar un libro (completo)
+- `DELETE /libros/:id` - Eliminar un libro
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+### Frontend
+
+- **React 19** - Librería UI
+- **TypeScript** - Tipado estático
+- **Vite** - Build tool
+- **React Router DOM** - Enrutamiento
+- **Axios** - Cliente HTTP
+- **CSS3** - Estilos
+
+### Backend
+
+- **Express** - Framework de servidor
+- **JSON Server** - Mock API REST
+- **JWT** - Autenticación
+- **bcrypt** - Hash de contraseñas
+- **CORS** - Habilitación de CORS
+
+---
+
+## ✅ Checklist de requisitos cumplidos
+
+### Requisitos funcionales
+
+- ✅ Página pública de inicio
+- ✅ Página pública de login
+- ✅ Almacenamiento del JWT
+- ✅ Rutas protegidas (PrivateRoute)
+- ✅ Página 404
+- ✅ Listado de libros (GET)
+- ✅ Consulta de detalles (GET)
+- ✅ Alta de libros (POST)
+- ✅ Edición de libros (PATCH/PUT)
+- ✅ Eliminación de libros (DELETE)
+- ✅ Gestión de errores de API
+- ✅ Estados de carga
+- ✅ Estados vacíos
+
+### Requisitos técnicos
+
+- ✅ React + TypeScript
+- ✅ React Router (rutas públicas, privadas, 404)
+- ✅ Hooks (useState, useEffect, useContext, useMemo)
+- ✅ Manejo de eventos (onClick, onSubmit, onChange)
+- ✅ async/await
+- ✅ Servicios separados para API
+- ✅ Componentes reutilizables
+- ✅ Diseño basado en componentes
+
+### Diseño/UI
+
+- ✅ Componentes reutilizables (Button, Card, etc.)
+- ✅ Feedback visual (mensajes, alertas)
+- ✅ Interfaz coherente y consistente
+- ✅ Diseño responsive
+
+---
+
+## 📦 Scripts disponibles
 
 ```bash
-npm run preview
+# Frontend
+npm run dev          # Iniciar servidor de desarrollo
+npm run build        # Compilar para producción
+npm run preview      # Vista previa de producción
+npm run lint         # Ejecutar linter
+
+# Backend
+cd backend
+node server.js       # Iniciar servidor backend
 ```
 
 ---
 
-## 3. Estructura principal
+## 🔐 Seguridad
 
-- Componente raíz: [`App`](src/App.tsx)
-- Entrada de la app: [`main.tsx`](src/main.tsx)
-- HTML base: [`index.html`](index.html)
-- Estilos globales: [`index.css`](src/index.css)
-- Estilos de la app: [`App.css`](src/App.css)
-- Tipos y datos:
-  - Tipo libro: [`Libro`](src/types/libro.ts)
-  - Datos iniciales: [`librosIniciales`](src/data/libros.ts)
-
-Componentes en `src/components/`:
-
-- [`Header`](src/components/Header.tsx)
-- [`Footer`](src/components/Footer.tsx)
-- [`FormularioLibro`](src/components/FormularioLibro.tsx)
-- [`ListaLibros`](src/components/ListaLibros.tsx)
-- [`TarjetaLibro`](src/components/TarjetaLibro.tsx)
-- [`DetalleLibro`](src/components/DetalleLibro.tsx)
-- [`Filtros`](src/components/Filtros.tsx)
-- [`Estadisticas`](src/components/Estadisticas.tsx)
-- [`EtiquetaEstado`](src/components/EtiquetaEstado.tsx)
-- [`Button`](src/components/Button.tsx)
+- JWT almacenado en `localStorage`
+- Interceptor de Axios para agregar automáticamente el token
+- Redirección automática al login cuando el token expira
+- Validación de datos en el backend
+- Protección de contraseñas con bcrypt
 
 ---
 
-## 4. Funcionalidades de la aplicación
+## 📄 Licencia
 
-1. **Listado de libros**
-
-   - Se muestran en un **grid de tarjetas** usando [`ListaLibros`](src/components/ListaLibros.tsx) y [`TarjetaLibro`](src/components/TarjetaLibro.tsx).
-   - Datos iniciales definidos en [`librosIniciales`](src/data/libros.ts).
-2. **Filtros y búsqueda**
-
-   - Componente [`Filtros`](src/components/Filtros.tsx):
-     - Búsqueda por **título** o **autor**.
-     - Filtros por estado: *Todos, Leídos, Leyendo, Pendientes*.
-   - El filtrado se aplica en [`App`](src/App.tsx) combinando:
-     - Estado `filtroEstado`
-     - Estado `busqueda`
-3. **Estadísticas de lectura**
-
-   - Componente [`Estadisticas`](src/components/Estadisticas.tsx):
-     - Total de libros.
-     - Libros leídos, leyendo y pendientes.
-     - Barra de progreso con el porcentaje de libros leídos:
-       - $porcentajeLeidos = \dfrac{librosLeidos}{totalLibros} \cdot 100$
-4. **Añadir nuevos libros**
-
-   - Formulario controlado [`FormularioLibro`](src/components/FormularioLibro.tsx):
-     - Maneja todos los campos con `useState`.
-     - Envía el nuevo libro a [`App`](src/App.tsx) mediante la callback `onAgregarLibro`.
-5. **Eliminación de libros**
-
-   - Botón de borrado en [`TarjetaLibro`](src/components/TarjetaLibro.tsx) que llama a `onDelete`.
-   - [`App`](src/App.tsx) implementa `eliminarLibro`, actualiza el estado y limpia el libro seleccionado si coincide.
-6. **Detalle de libro seleccionado**
-
-   - Componente [`DetalleLibro`](src/components/DetalleLibro.tsx):
-     - Muestra portada grande, título, autor, año, estado, calificación y reseña.
-     - Se abre al seleccionar una tarjeta y se cierra con un botón reutilizable [`Button`](src/components/Button.tsx).
-7. **Etiquetas de estado reutilizables**
-
-   - Componente [`EtiquetaEstado`](src/components/EtiquetaEstado.tsx):
-     - Se usa en [`TarjetaLibro`](src/components/TarjetaLibro.tsx) y [`DetalleLibro`](src/components/DetalleLibro.tsx).
-     - Pinta estilos diferentes según la prop `estado`.
+Este proyecto fue desarrollado como práctica final para el módulo de Entorno Cliente.
 
 ---
 
-## 5. Relación con los requisitos de la práctica
+## 🤝 Contribuciones
 
-### A. Componentes (mínimo 8)
+Este es un proyecto académico, pero si deseas mejorarlo:
 
-1. **Componente raíz App**
-
-   - [`App`](src/App.tsx): controla el estado global (`libros`, `libroSeleccionado`, `filtroEstado`, `busqueda`) y coordina a todos los componentes.
-2. **Componentes sin props**
-
-   - [`Header`](src/components/Header.tsx): encabezado estático con logo y título.
-   - [`Footer`](src/components/Footer.tsx): pie de página estático.
-3. **Componentes reutilizables (usados varias veces)**
-
-   - [`TarjetaLibro`](src/components/TarjetaLibro.tsx)
-     - Se usa N veces dentro de [`ListaLibros`](src/components/ListaLibros.tsx) con `.map`.
-   - [`Button`](src/components/Button.tsx)
-     - Botón genérico con variación de color (`color`) y texto (`texto`), usado por ejemplo en [`DetalleLibro`](src/components/DetalleLibro.tsx).
-   - [`EtiquetaEstado`](src/components/EtiquetaEstado.tsx)
-     - Reutilizado en [`TarjetaLibro`](src/components/TarjetaLibro.tsx) y [`DetalleLibro`](src/components/DetalleLibro.tsx) con distintas props.
-4. **Componentes que reciben props para personalizar apariencia o contenido**
-
-   - [`Button`](src/components/Button.tsx)
-     - Props: `texto`, `color`, `onClick`.
-   - [`Estadisticas`](src/components/Estadisticas.tsx)
-     - Props: `libros`, `mostrarTotalLeidos` (permite personalizar contenido).
-   - [`EtiquetaEstado`](src/components/EtiquetaEstado.tsx)
-     - Prop: `estado` → cambia color y texto.
-   - [`TarjetaLibro`](src/components/TarjetaLibro.tsx)
-     - Prop opcional `mostrarDetalles` para mostrar/ocultar información extendida.
-5. **Componente formulario controlado**
-
-   - [`FormularioLibro`](src/components/FormularioLibro.tsx)
-     - Usa `useState` para todos los campos del formulario (título, autor, portada, año, estado, reseña, calificación).
-     - Todos los inputs son controlados (`value` + `onChange`).
-     - Envía los datos mediante el callback `onAgregarLibro`.
-6. **Componentes que reciben funciones callback para cambiar state (comunicación hijo → padre)**
-
-   - [`FormularioLibro`](src/components/FormularioLibro.tsx) → `onAgregarLibro`
-   - [`ListaLibros`](src/components/ListaLibros.tsx) → `onSelectLibro`, `onDeleteLibro`
-   - [`TarjetaLibro`](src/components/TarjetaLibro.tsx) → `onSelect`, `onDelete`
-   - [`Filtros`](src/components/Filtros.tsx) → `onFiltrarEstado`, `onBuscar`
-   - [`DetalleLibro`](src/components/DetalleLibro.tsx) → `onClose`
-
-   Todas estas callbacks se definen en [`App`](src/App.tsx) y se pasan por props.
-7. **Componente que muestra una lista de elementos**
-
-   - [`ListaLibros`](src/components/ListaLibros.tsx)
-     - Renderiza múltiples [`TarjetaLibro`](src/components/TarjetaLibro.tsx) con `.map`.
-     - Gestiona el mensaje de lista vacía.
-8. **Componente visor / panel de información de un elemento seleccionado**
-
-   - [`DetalleLibro`](src/components/DetalleLibro.tsx)
-     - Muestra la información detallada del `libroSeleccionado`.
-     - Se renderiza en el panel derecho definido desde [`App`](src/App.tsx).
+1. Fork el proyecto
+2. Crea una rama (`git checkout -b feature/mejora`)
+3. Commit tus cambios (`git commit -m 'Añadir mejora'`)
+4. Push a la rama (`git push origin feature/mejora`)
+5. Abre un Pull Request
 
 ---
 
-### B. Estados (`useState`)
+## 📞 Contacto
 
-1. **Estados locales independientes (mínimo 2 componentes)**
-
-   - [`FormularioLibro`](src/components/FormularioLibro.tsx)
-     - Varios estados locales: `titulo`, `autor`, `portada`, `año`, `estado`, `resena`, `calificacion`.
-   - [`Filtros`](src/components/Filtros.tsx)
-     - Estado local `estadoActivo` para saber qué botón de filtro está marcado visualmente.
-   - Ambos estados son **independientes** del estado global de [`App`](src/App.tsx).
-2. **Estado compartido entre varios componentes**
-
-   En [`App`](src/App.tsx):
-
-   - `libros: Libro[]`
-
-     - **Leído por**:
-       - [`ListaLibros`](src/components/ListaLibros.tsx) (muestra la lista filtrada).
-       - [`Estadisticas`](src/components/Estadisticas.tsx) (calcula métricas).
-       - [`DetalleLibro`](src/components/DetalleLibro.tsx) de forma indirecta, vía `libroSeleccionado`.
-     - **Modificado por**:
-       - [`FormularioLibro`](src/components/FormularioLibro.tsx) → callback `agregarLibro`.
-       - [`TarjetaLibro`](src/components/TarjetaLibro.tsx) → callback `eliminarLibro` (pasando por [`ListaLibros`](src/components/ListaLibros.tsx)).
-   - `libroSeleccionado: Libro | null`
-
-     - **Leído por**:
-       - [`DetalleLibro`](src/components/DetalleLibro.tsx), que muestra el panel de detalle.
-     - **Modificado por**:
-       - [`TarjetaLibro`](src/components/TarjetaLibro.tsx) → callback `seleccionarLibro`.
-       - Botón de cerrar de [`DetalleLibro`](src/components/DetalleLibro.tsx) → `onClose`.
-   - `filtroEstado` y `busqueda`
-
-     - **Leídos por**:
-       - [`App`](src/App.tsx) para calcular `librosFiltrados`.
-     - **Modificados por**:
-       - [`Filtros`](src/components/Filtros.tsx) mediante `onFiltrarEstado` y `onBuscar`.
-
-   Se cumple así el requisito de que **un mismo estado afecta a varios componentes**, y se **modifica siempre mediante callbacks** enviadas desde `App`.
+Para cualquier consulta o sugerencia sobre el proyecto, puedes contactarme a través de GitHub.
 
 ---
 
-### C. Reutilización de componentes
-
-- [`TarjetaLibro`](src/components/TarjetaLibro.tsx)
-  - Usada **N veces** en [`ListaLibros`](src/components/ListaLibros.tsx), una por cada libro del array.
-- [`EtiquetaEstado`](src/components/EtiquetaEstado.tsx)
-  - Reutilizada en:
-    - [`TarjetaLibro`](src/components/TarjetaLibro.tsx)
-    - [`DetalleLibro`](src/components/DetalleLibro.tsx)
-- [`Button`](src/components/Button.tsx)
-  - Botón **genérico** parametrizable (`texto`, `color`, `onClick`), usado en el visor de detalle y reutilizable en cualquier otra parte.
-
-Esto demuestra la **reutilización real** de componentes con diferentes props y en contextos distintos.
-
----
-
-## 6. Tipo de datos `Libro` y datos iniciales
-
-- El tipo principal de la aplicación es [`Libro`](src/types/libro.ts), que define:
-  - `id`, `titulo`, `autor`, `portada`, `año`, `estado`, `resena`, `calificacion`.
-- Los datos de ejemplo están en [`librosIniciales`](src/data/libros.ts) y se usan como estado inicial de `libros` en [`App`](src/App.tsx).
-
----
-
-## 7. Posibles mejoras futuras
-
-- Persistencia en `localStorage`.
-- Edición de libros existentes.
-- Ordenación por año, autor o calificación.
-- Más vistas (lista compacta, tabla, etc.).
+**Desarrollado por Francisco Pérez - 2026**

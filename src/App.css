@@ -5,14 +5,27 @@
  * 
  * Este archivo contiene TODOS los estilos de la aplicación.
  * 
- * Paleta de colores tema BURDEOS:
- * - Color principal: Burdeos (#8B1538, #A01D48)
- * - Fondo: Negro y tonos oscuros (#1a1a1a, #2a2a2a, #3a3a3a)
- * - Acentos: Degradados de burdeos
- * - Textos: Blanco (#f0f0f0) y grises claros (#b0b0b0, #d0d0d0)
- * - Peligro: Rojo oscuro (#c41e3a)
- * - Éxito: Verde (#4caf50, #45a049)
- * - Advertencia: Naranja (#ff9800, #f57c00)
+ * 🎨 PALETA DE COLORES PREMIUM - BURDEOS, BLANCO Y NEGRO:
+ * 
+ * Color Principal:
+ *   • Burdeos: #800020 (color primario elegante y sofisticado)
+ *   • Burdeos Hover: #A00028 (hover y estados activos)
+ * 
+ * Fondos y Superficies:
+ *   • Negro Principal: #0D0D0D (fondo base ultra oscuro)
+ *   • Negro Elevado: #1A1A1A (tarjetas y contenedores principales)
+ *   • Negro Contraste: #262626 (elementos elevados y bordes)
+ * 
+ * Textos:
+ *   • Blanco Principal: #FFFFFF (textos principales, máximo contraste)
+ *   • Gris Claro: #E0E0E0 (textos secundarios)
+ *   • Gris Medio: #B0B0B0 (textos terciarios y placeholders)
+ *   • Gris Oscuro: #7A7A7A (textos deshabilitados)
+ * 
+ * Colores de Estado:
+ *   • Éxito: #4CAF50 (verde limpio)
+ *   • Advertencia: #FF9800 (naranja vibrante)
+ *   • Peligro: #D32F2F (rojo intenso)
  * 
  * Estructura del archivo:
  * 1. Reset y estilos base
@@ -62,14 +75,14 @@ body {
   /* Tipografía moderna y legible */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   
-  /* Fondo degradado oscuro */
-  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  /* Fondo negro premium */
+  background: #0D0D0D;
   
   /* Asegura que el body ocupe toda la altura */
   min-height: 100vh;
   
-  /* Color de texto por defecto (blanco/gris claro) */
-  color: #f0f0f0;
+  /* Color de texto por defecto (blanco puro) */
+  color: #FFFFFF;
 }
 
 .app {
@@ -85,66 +98,118 @@ body {
    2. HEADER - Encabezado de la aplicación
    ============================================================================
    
-   Componente estático que muestra el logo y eslogan de NubeLectora.
-   ✅ REQUISITO: Componente sin props (Header)
+   Componente que muestra el logo, eslogan y usuario de NubeLectora.
 */
 .header {
-  /* Fondo degradado burdeos (color principal de la app) */
-  background: linear-gradient(135deg, #8B1538 0%, #A01D48 100%);
+  /* Fondo burdeos sólido premium */
+  background: #800020;
   
   /* Espaciado interno generoso */
-  padding: 2rem;
+  padding: 1.5rem 2rem;
   
-  /* Centrado del contenido */
-  text-align: center;
-  
-  /* Sombra para dar profundidad con tono burdeos */
-  box-shadow: 0 4px 20px rgba(139, 21, 56, 0.4);
+  /* Sombra para dar profundidad */
+  box-shadow: 0 4px 20px rgba(128, 0, 32, 0.5);
   
   /* Separación inferior */
   margin-bottom: 2rem;
-  
-  /* Layout flexible para centrar el contenido */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
-.header h1 {
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-brand h1 {
   /* Tamaño grande para el título principal */
-  font-size: 2.5rem;
+  font-size: 2rem;
   
   /* Color blanco puro para máximo contraste */
   color: #fff;
   
   /* Separación inferior */
-  margin-bottom: 0.5rem;
+  margin: 0;
   
   /* Sombra de texto para efecto 3D */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  
-  /* Layout flexible para centrar logo y texto */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-  margin-left: -90px;
 }
 
 .header-logo {
   /* Logo al lado de titulo con las dimensiones adecuadas */
-  width: 200px;
-  height: 100px;
-  margin-right: -60px;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
 }
 
-.header p {
-  /* Color blanco/gris muy claro */
-  color: #f0f0f0;
+.header-brand p {
+  /* Color blanco puro */
+  color: #FFFFFF;
+  opacity: 0.9;
   
   /* Tamaño mediano para el eslogan */
-  font-size: 1.1rem;
+  font-size: 0.95rem;
+  margin: 0.3rem 0 0 0;
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.user-name {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-logout {
+  padding: 0.6rem 1.2rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid white;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-logout:hover {
+  background: white;
+  color: #800020;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header-brand {
+    flex-direction: column;
+  }
+
+  .header-user {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 
@@ -194,20 +259,20 @@ body {
   position: sticky;
   top: 20px;
   
-  /* Fondo oscuro */
-  background: #2a2a2a;
+  /* Fondo oscuro elevado */
+  background: #1A1A1A;
   
-  /* Bordes redondeados */
-  border-radius: 15px;
+  /* Bordes redondeados suaves */
+  border-radius: 16px;
   
   /* Espaciado interno */
   padding: 1.5rem;
   
-  /* Sombra profunda */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  /* Sombra profunda premium */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   
-  /* Borde burdeos para destacar */
-  border: 2px solid #8B1538;
+  /* Borde burdeos sutil */
+  border: 1px solid #800020;
   
   /* Altura máxima (viewport menos 40px de margen) */
   max-height: calc(100vh - 40px);
@@ -217,8 +282,8 @@ body {
 }
 
 .sidebar-formulario h2 {
-  /* Color burdeos para el título */
-  color: #A01D48;
+  /* Color burdeos premium */
+  color: #800020;
   
   /* Separación inferior */
   margin-bottom: 1.2rem;
@@ -228,6 +293,9 @@ body {
   
   /* Centrado del texto */
   text-align: center;
+  
+  /* Peso de fuente elegante */
+  font-weight: 600;
 }
 
 /* ============================================================================
@@ -260,20 +328,23 @@ body {
    ✅ REQUISITO: Componente que recibe props para personalizar contenido
 */
 .estadisticas {
-  /* Fondo oscuro */
-  background: #2a2a2a;
+  /* Fondo oscuro elevado */
+  background: #1A1A1A;
   
-  /* Bordes redondeados */
-  border-radius: 15px;
+  /* Bordes redondeados suaves */
+  border-radius: 16px;
   
   /* Espaciado interno */
   padding: 2rem;
   
-  /* Sombra profunda */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  /* Sombra profunda premium */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   
-  /* Borde izquierdo burdeos para destacar */
-  border-left: 5px solid #8B1538;
+  /* Borde izquierdo burdeos elegante */
+  border-left: 4px solid #800020;
+  
+  /* Espaciado para barra de progreso */
+  margin-bottom: 1.5rem;
 }
 
 .estadisticas h3 {
@@ -281,22 +352,26 @@ body {
   font-size: 1.5rem;
   
   /* Separación inferior */
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   
-  /* Layout horizontal con el emoji */
+  /* Layout horizontal con el icono */
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   
-  /* Color burdeos */
-  color: #A01D48;
+  /* Color burdeos premium */
+  color: #800020;
+  
+  /* Peso de fuente */
+  font-weight: 600;
 }
 
 /* Grid de 4 columnas para las 4 estadísticas */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
 }
 
 /* Tarjeta individual de estadística */
@@ -304,62 +379,71 @@ body {
   /* Centrado del contenido */
   text-align: center;
   
-  /* Espaciado interno */
-  padding: 1rem;
+  /* Espaciado interno mejorado */
+  padding: 1.75rem 1rem;
   
-  /* Fondo más oscuro que el contenedor */
-  background: #1a1a1a;
+  /* Fondo negro principal */
+  background: #0D0D0D;
   
-  /* Bordes redondeados */
-  border-radius: 10px;
+  /* Bordes redondeados suaves */
+  border-radius: 14px;
   
   /* Transición suave al hacer hover */
-  transition: transform 0.2s;
+  transition: all 0.3s ease;
   
-  /* Borde gris oscuro */
-  border: 2px solid #3a3a3a;
+  /* Borde sutil */
+  border: 1px solid #262626;
+  
+  /* Flexbox para mejor alineación vertical */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 /* Efecto hover: la tarjeta se eleva */
 .stat-item:hover {
   transform: translateY(-5px);
-  border-color: #8B1538;
+  border-color: #800020;
+  box-shadow: 0 12px 32px rgba(128, 0, 32, 0.4);
 }
 
 /* Número grande de la estadística */
 .stat-numero {
   display: block;
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #A01D48; /* Color burdeos */
+  font-size: 3rem;
+  font-weight: 700;
+  color: #800020;
+  line-height: 1;
 }
 
 /* Etiqueta descriptiva de la estadística */
 .stat-label {
   display: block;
-  font-size: 0.9rem;
-  color: #b0b0b0;
-  margin-top: 0.5rem;
-  text-transform: uppercase; /* Texto en mayúsculas */
-  letter-spacing: 1px; /* Espaciado entre letras */
+  font-size: 0.8rem;
+  color: #B0B0B0;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
 }
 
 /* Contenedor de la barra de progreso */
 .progreso {
-  margin-top: 1.5rem;
-  background: #1a1a1a; /* Fondo oscuro */
+  background: #0D0D0D;
   height: 10px;
-  border-radius: 5px;
-  overflow: hidden; /* Oculta el contenido que sobresale */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* Barra de progreso interior (ancho dinámico) */
 .barra-progreso {
   height: 100%;
-  /* Degradado burdeos horizontal */
-  background: linear-gradient(90deg, #8B1538, #A01D48);
-  /* Transición suave al cambiar el ancho */
+  background: linear-gradient(90deg, #800020 0%, #A00028 100%);
   transition: width 0.5s ease;
+  box-shadow: 0 0 16px rgba(128, 0, 32, 0.8);
+  border-radius: 10px;
 }
 
 /* ============================================================================
@@ -378,13 +462,13 @@ body {
   /* Sin borde por defecto */
   border: none;
   
-  /* Bordes muy redondeados (píldora) */
-  border-radius: 25px;
+  /* Bordes redondeados elegantes */
+  border-radius: 12px;
   
   /* Tamaño de fuente */
   font-size: 1rem;
   
-  /* Texto en negrita */
+  /* Texto en semi-negrita */
   font-weight: 600;
   
   /* Cursor de puntero al pasar el mouse */
@@ -396,46 +480,47 @@ body {
   justify-content: center;
   gap: 0.5rem;
   
-  /* Transiciones suaves para todos los efectos */
+  /* Transiciones suaves */
   transition: all 0.3s ease;
   
-  /* Sombra oscura */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  /* Sombra sutil */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* Efecto hover: botón se eleva */
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Variante PRIMARY - Color burdeos (acción principal) */
 .btn-primary {
-  background: linear-gradient(135deg, #8B1538, #A01D48);
+  background: #800020;
   color: white;
 }
 
 /* Variante SECONDARY - Color gris (acción secundaria) */
 .btn-secondary {
-  background: linear-gradient(135deg, #3a3a3a, #4a4a4a);
+  background: #262626;
   color: white;
+  border: 1px solid #333333;
 }
 
 /* Variante DANGER - Color rojo (acción destructiva) */
 .btn-danger {
-  background: linear-gradient(135deg, #c41e3a, #8B1538);
+  background: #D32F2F;
   color: white;
 }
 
 /* Variante SUCCESS - Color verde (acción exitosa) */
 .btn-success {
-  background: linear-gradient(135deg, #4caf50, #45a049);
+  background: #4CAF50;
   color: white;
 }
 
 /* Variante WARNING - Color naranja (advertencia) */
 .btn-warning {
-  background: linear-gradient(135deg, #ff9800, #f57c00);
+  background: #FF9800;
   color: white;
 }
 
@@ -493,28 +578,28 @@ body {
   width: 100%;
   
   /* Espaciado interno */
-  padding: 0.7rem;
+  padding: 0.8rem;
   
-  /* Borde gris oscuro */
-  border: 2px solid #3a3a3a;
+  /* Borde sutil */
+  border: 1px solid #262626;
   
-  /* Bordes redondeados */
-  border-radius: 8px;
+  /* Bordes redondeados suaves */
+  border-radius: 10px;
   
   /* Tamaño de fuente */
   font-size: 0.9rem;
   
-  /* Transición del borde al hacer focus */
-  transition: border-color 0.3s;
+  /* Transición del borde */
+  transition: all 0.3s ease;
   
   /* Hereda la fuente del body */
   font-family: inherit;
   
-  /* Fondo oscuro */
-  background: #1a1a1a;
+  /* Fondo negro principal */
+  background: #0D0D0D;
   
-  /* Texto claro */
-  color: #f0f0f0;
+  /* Texto blanco puro */
+  color: #FFFFFF;
 }
 
 /* Efecto focus: borde cambia a burdeos */
@@ -522,7 +607,8 @@ body {
 .formulario-libro select:focus,
 .formulario-libro textarea:focus {
   outline: none;
-  border-color: #8B1538;
+  border-color: #800020;
+  box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.1);
 }
 
 /* Textarea con altura mínima y redimensionable verticalmente */
@@ -536,40 +622,48 @@ body {
   /* Ancho completo */
   width: 100%;
   
-  /* Fondo degradado burdeos */
-  background: linear-gradient(135deg, #8B1538, #A01D48);
+  /* Fondo burdeos premium */
+  background: #800020;
   
   /* Texto blanco */
   color: white;
   
   /* Espaciado interno */
-  padding: 0.9rem;
+  padding: 1rem;
   
   /* Sin borde */
   border: none;
   
   /* Bordes redondeados */
-  border-radius: 8px;
+  border-radius: 10px;
   
   /* Tamaño de fuente */
-  font-size: 0.95rem;
+  font-size: 1rem;
   
-  /* Texto en negrita */
+  /* Texto semi-negrita */
   font-weight: 600;
   
   /* Cursor de puntero */
   cursor: pointer;
   
-  /* Transición suave al hacer hover */
-  transition: transform 0.2s;
+  /* Transición suave */
+  transition: all 0.3s ease;
   
   /* Separación superior */
   margin-top: 0.5rem;
+  
+  /* Flex para centrar icono */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 /* Efecto hover: botón se agranda ligeramente */
 .btn-submit:hover {
-  transform: scale(1.02);
+  background: #A00028;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(128, 0, 32, 0.4);
 }
 
 /* ============================================================================
@@ -588,7 +682,7 @@ body {
 
 /* Etiqueta del slider */
 .calificacion-slider label {
-  color: #A01D48;
+  color: #800020;
   font-weight: 600;
   font-size: 0.95rem;
   text-align: center;
@@ -598,9 +692,8 @@ body {
 .slider {
   width: 100%;
   height: 8px;
-  border-radius: 5px;
-  /* Degradado de oscuro a burdeos */
-  background: linear-gradient(to right, #1a1a1a 0%, #8B1538 100%);
+  border-radius: 8px;
+  background: linear-gradient(to right, #0D0D0D 0%, #800020 100%);
   outline: none;
   cursor: pointer;
 }
@@ -611,35 +704,35 @@ body {
   appearance: none;
   width: 20px;
   height: 20px;
-  border-radius: 50%; /* Círculo perfecto */
-  background: #A01D48; /* Color burdeos */
+  border-radius: 50%;
+  background: #800020;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(139, 21, 56, 0.6);
+  box-shadow: 0 2px 8px rgba(128, 0, 32, 0.6);
   transition: all 0.2s ease;
 }
 
 /* Efecto hover en el thumb (WebKit) */
 .slider::-webkit-slider-thumb:hover {
   transform: scale(1.2);
-  box-shadow: 0 4px 12px rgba(139, 21, 56, 0.8);
+  box-shadow: 0 4px 12px rgba(128, 0, 32, 0.8);
 }
 
 /* Thumb (círculo) del slider para Firefox */
 .slider::-moz-range-thumb {
   width: 20px;
   height: 20px;
-  border-radius: 50%; /* Círculo perfecto */
-  background: #A01D48; /* Color burdeos */
+  border-radius: 50%;
+  background: #800020;
   cursor: pointer;
   border: none;
-  box-shadow: 0 2px 8px rgba(139, 21, 56, 0.6);
+  box-shadow: 0 2px 8px rgba(128, 0, 32, 0.6);
   transition: all 0.2s ease;
 }
 
 /* Efecto hover en el thumb (Firefox) */
 .slider::-moz-range-thumb:hover {
   transform: scale(1.2);
-  box-shadow: 0 4px 12px rgba(139, 21, 56, 0.8);
+  box-shadow: 0 4px 12px rgba(128, 0, 32, 0.8);
 }
 
 /* Etiquetas debajo del slider (0, 1, 2, 3, 4, 5) */
@@ -662,37 +755,38 @@ body {
 .vista-toggle {
   display: flex;
   gap: 0.5rem;
-  background: #2a2a2a;
+  background: #1A1A1A;
   padding: 0.5rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   width: fit-content;
 }
 
 /* Botón individual de vista */
 .btn-vista {
   padding: 0.6rem 1.2rem;
-  border: 2px solid #3a3a3a;
-  background: #1a1a1a;
-  color: #b0b0b0;
-  border-radius: 8px;
+  border: 1px solid #262626;
+  background: #0D0D0D;
+  color: #B0B0B0;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   font-weight: 600;
   font-size: 0.9rem;
 }
 
 /* Efecto hover en botón de vista */
 .btn-vista:hover {
-  border-color: #8B1538;
-  color: #A01D48;
+  border-color: #800020;
+  color: #800020;
+  transform: translateY(-2px);
 }
 
 /* Botón de vista activo */
 .btn-vista.active {
-  background: linear-gradient(135deg, #8B1538, #A01D48);
+  background: #800020;
   color: white;
-  border-color: #8B1538;
+  border-color: #800020;
 }
 
 /* ============================================================================
@@ -706,63 +800,79 @@ body {
 
 /* Contenedor principal de filtros */
 .filtros {
-  background: #2a2a2a;
-  border-radius: 15px;
+  background: #1A1A1A;
+  border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  flex: 1;
-  border: 2px solid #8B1538;
+  border: 1px solid #262626;
 }
 
 /* Input de búsqueda */
 .input-busqueda {
   width: 100%;
-  padding: 0.8rem 1rem;
-  border: 2px solid #3a3a3a;
-  border-radius: 25px; /* Muy redondeado */
-  font-size: 1rem;
-  background: #1a1a1a;
-  color: #f0f0f0;
+  padding: 0.75rem 1rem;
+  border: 1px solid #262626;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #262626;
+  color: #FFFFFF;
+  transition: all 0.3s ease;
 }
 
 /* Efecto focus en el input de búsqueda */
 .input-busqueda:focus {
   outline: none;
-  border-color: #8B1538;
+  border-color: #800020;
+  box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.2);
+  background: #0D0D0D;
 }
 
 /* Placeholder del input */
 .input-busqueda::placeholder {
-  color: #666;
+  color: #7A7A7A;
 }
 
 /* Contenedor de botones de filtro por estado */
 .filtros-estado {
   display: flex;
   gap: 0.5rem;
-  flex-wrap: wrap; /* Permite que los botones se envuelvan */
+  flex-wrap: wrap;
 }
 
 /* Botones de filtro por estado */
 .filtros-estado button {
-  padding: 0.5rem 1rem;
-  border: 2px solid #8B1538;
-  background: #1a1a1a;
-  color: #A01D48;
-  border-radius: 20px;
+  padding: 0.625rem 1.25rem;
+  border: 1px solid #262626;
+  background: #262626;
+  color: #B0B0B0;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  flex: 1;
+  justify-content: center;
+  min-width: fit-content;
 }
 
 /* Efecto hover y estado activo en botones de filtro */
-.filtros-estado button:hover,
+.filtros-estado button:hover {
+  background: rgba(128, 0, 32, 0.2);
+  border-color: #800020;
+  color: #FFFFFF;
+}
+
 .filtros-estado button.active {
-  background: linear-gradient(135deg, #8B1538, #A01D48);
-  color: white;
+  background: #800020;
+  color: #FFFFFF;
+  border-color: #A00028;
+  box-shadow: 0 4px 12px rgba(128, 0, 32, 0.4);
 }
 
 /* ============================================================================
@@ -773,23 +883,23 @@ body {
    ✅ REQUISITO: Componente que muestra lista de elementos (ListaLibros)
 */
 
-/* Grid de 4 columnas para las tarjetas de libros */
+/* Grid de 3 columnas para las tarjetas de libros */
 .lista-libros {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  padding: 1rem 0;
+  padding: 0;
 }
 
 /* Mensaje cuando no hay libros (lista vacía) */
 .lista-vacia {
   text-align: center;
   padding: 3rem;
-  background: #2a2a2a;
-  border-radius: 15px;
-  color: #b0b0b0;
-  font-size: 1.2rem;
-  border: 2px solid #3a3a3a;
+  background: #1A1A1A;
+  border-radius: 8px;
+  color: #B0B0B0;
+  font-size: 1rem;
+  border: 1px solid #262626;
 }
 
 /* ============================================================================
@@ -805,39 +915,39 @@ body {
 
 /* Contenedor principal de la tarjeta de libro */
 .tarjeta-libro {
-  /* Fondo oscuro */
-  background: #2a2a2a;
+  /* Fondo oscuro elevado */
+  background: #1A1A1A;
   
-  /* Bordes muy redondeados */
-  border-radius: 15px;
+  /* Bordes redondeados suaves */
+  border-radius: 8px;
   
-  /* Borde gris oscuro */
-  border: 2px solid #3a3a3a;
+  /* Borde sutil */
+  border: 1px solid #262626;
   
   /* Espaciado interno */
-  padding: 1.5rem;
+  padding: 1.25rem;
   
-  /* Cursor de puntero (toda la tarjeta es clickeable) */
+  /* Cursor de puntero */
   cursor: pointer;
   
-  /* Transiciones suaves para efectos hover */
+  /* Transiciones suaves */
   transition: all 0.3s ease;
   
-  /* Posicionamiento relativo para el botón eliminar absoluto */
+  /* Posicionamiento relativo */
   position: relative;
   
-  /* Oculta el botón eliminar que sobresale */
+  /* Oculta el contenido que sobresale */
   overflow: hidden;
   
-  /* Sombra profunda */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  /* Sombra premium */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
 }
 
-/* Efecto hover en la tarjeta: se eleva y cambia borde a burdeos */
+/* Efecto hover en la tarjeta: se eleva sutilmente */
 .tarjeta-libro:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(139, 21, 56, 0.4);
-  border-color: #8B1538;
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(128, 0, 32, 0.5);
+  border-color: #800020;
 }
 
 /* Imagen de portada del libro */
@@ -845,63 +955,69 @@ body {
   /* Ancho completo del contenedor */
   width: 100%;
   
-  /* Altura fija */
-  height: 250px;
+  /* Altura aumentada para ver la portada completa */
+  height: 400px;
   
-  /* Recorte y ajuste de imagen */
+  /* Recorta la imagen para llenar el espacio sin dejar huecos */
   object-fit: cover;
   
   /* Bordes redondeados */
-  border-radius: 10px;
+  border-radius: 6px;
   
   /* Separación inferior */
-  margin-bottom: 1rem;
+  margin-bottom: 0.875rem;
+  
+  /* Borde sutil */
+  border: 1px solid #262626;
 }
 
 /* Título del libro */
 .tarjeta-libro h3 {
-  /* Color claro */
-  color: #f0f0f0;
+  /* Color blanco */
+  color: #FFFFFF;
   
   /* Tamaño del título */
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   
   /* Separación inferior */
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.375rem;
   
-  /* Manejo de texto largo: oculta con puntos suspensivos */
+  /* Manejo de texto largo */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  
+  /* Peso de fuente */
+  font-weight: 600;
 }
 
 /* Autor del libro */
 .tarjeta-libro .autor {
-  /* Color gris claro */
-  color: #b0b0b0;
+  /* Color gris */
+  color: #B0B0B0;
   
   /* Tamaño de fuente */
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   
   /* Separación inferior */
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.625rem;
 }
 
 /* Calificación en estrellas */
 .tarjeta-libro .calificacion {
-  font-size: 1.2rem;
-  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  margin-top: 0.375rem;
 }
 
 /* Botón de eliminar (X) en la esquina superior derecha */
 .btn-delete {
-  /* Posicionamiento absoluto respecto a .tarjeta-libro */
+  /* Posicionamiento absoluto */
   position: absolute;
   top: 1rem;
   right: 1rem;
   
-  /* Fondo rojo translúcido */
-  background: rgba(196, 30, 58, 0.9);
+  /* Fondo rojo peligro */
+  background: #D32F2F;
   
   /* Texto blanco */
   color: white;
@@ -919,7 +1035,7 @@ body {
   /* Cursor de puntero */
   cursor: pointer;
   
-  /* Tamaño de fuente para la X */
+  /* Tamaño de fuente */
   font-size: 1.2rem;
   
   /* Centrado del contenido */
@@ -928,10 +1044,13 @@ body {
   justify-content: center;
   
   /* Transiciones suaves */
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   
   /* Inicialmente invisible */
   opacity: 0;
+  
+  /* Peso de fuente */
+  font-weight: 700;
 }
 
 /* Botón eliminar visible solo al hacer hover sobre la tarjeta */
@@ -941,8 +1060,9 @@ body {
 
 /* Efecto hover en el botón eliminar: se agranda y cambia color */
 .btn-delete:hover {
-  transform: scale(1.1);
-  background: rgba(139, 21, 56, 1);
+  transform: scale(1.15);
+  background: #B71C1C;
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.5);
 }
 
 /* ============================================================================
@@ -955,34 +1075,34 @@ body {
 
 /* Contenedor del panel de detalle */
 .detalle-libro-panel {
-  /* Posición sticky para que se quede fijo al hacer scroll */
+  /* Posición sticky */
   position: sticky;
   top: 20px;
   
-  /* Fondo oscuro */
-  background: #2a2a2a;
+  /* Fondo oscuro elevado */
+  background: #1A1A1A;
   
-  /* Bordes redondeados */
-  border-radius: 15px;
+  /* Bordes redondeados suaves */
+  border-radius: 16px;
   
   /* Espaciado interno */
   padding: 2rem;
   
-  /* Sombra profunda */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  /* Sombra profunda premium */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   
-  /* Borde burdeos */
-  border: 2px solid #8B1538;
+  /* Borde burdeos sutil */
+  border: 1px solid #800020;
   
-  /* Altura máxima (viewport menos 40px de margen) */
+  /* Altura máxima */
   max-height: calc(100vh - 40px);
   
-  /* Scroll vertical si el contenido excede la altura */
+  /* Scroll vertical */
   overflow-y: auto;
   
-  /* ✅ NUEVO: Ocultar scrollbar específicamente en el panel de detalle */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer y Edge */
+  /* Ocultar scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* ✅ NUEVO: Ocultar scrollbar WebKit en panel de detalle */
@@ -992,13 +1112,13 @@ body {
 
 /* Estado vacío: cuando no hay libro seleccionado */
 .detalle-libro-panel.empty {
-  /* Centra el mensaje de "Selecciona un libro" */
+  /* Centra el mensaje */
   display: flex;
   align-items: center;
   justify-content: center;
   
   /* Texto gris */
-  color: #b0b0b0;
+  color: #B0B0B0;
   
   /* Tamaño de fuente */
   font-size: 1.1rem;
@@ -1039,31 +1159,37 @@ body {
 
 /* Título del libro en el panel de detalle */
 .detalle-libro-panel h2 {
-  /* Color burdeos */
-  color: #A01D48;
+  /* Color burdeos premium */
+  color: #800020;
   
   /* Tamaño grande */
   font-size: 1.8rem;
   
   /* Separación inferior */
   margin-bottom: 0.5rem;
+  
+  /* Peso de fuente */
+  font-weight: 600;
 }
 
 /* Autor en el panel de detalle */
 .detalle-libro-panel h3 {
-  /* Color gris claro */
-  color: #b0b0b0;
+  /* Color gris medio */
+  color: #B0B0B0;
   
   /* Tamaño mediano */
   font-size: 1.2rem;
   
   /* Separación inferior */
   margin-bottom: 1rem;
+  
+  /* Peso de fuente */
+  font-weight: 500;
 }
 
 /* Año de publicación */
 .detalle-libro-panel .año {
-  color: #888;
+  color: #7A7A7A;
   font-size: 0.9rem;
   margin-bottom: 1rem;
 }
@@ -1083,40 +1209,43 @@ body {
   display: inline-block;
   
   /* Espaciado interno */
-  padding: 0.5rem 1rem;
+  padding: 0.375rem 0.875rem;
   
-  /* Bordes muy redondeados (píldora) */
-  border-radius: 20px;
+  /* Bordes redondeados */
+  border-radius: 6px;
   
-  /* Texto blanco */
-  color: white;
+  /* Color de texto */
+  color: #FFFFFF;
   
   /* Tamaño de fuente */
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   
-  /* Texto en negrita */
+  /* Texto semi-negrita */
   font-weight: 600;
   
   /* Texto en mayúsculas */
   text-transform: uppercase;
   
   /* Separación inferior */
-  margin-bottom: 1rem;
+  margin-bottom: 0.625rem;
+  
+  /* Espaciado entre letras */
+  letter-spacing: 0.5px;
 }
 
-/* Badge LEÍDO - Verde (éxito) */
+/* Badge LEÍDO - Verde success */
 .badge-leido {
-  background: linear-gradient(135deg, #4caf50, #45a049);
+  background: #2E7D32;
 }
 
-/* Badge LEYENDO - Naranja (en progreso) */
+/* Badge LEYENDO - Naranja warning */
 .badge-leyendo {
-  background: linear-gradient(135deg, #ff9800, #f57c00);
+  background: #F57C00;
 }
 
-/* Badge PENDIENTE - Rojo/Burdeos (pendiente) */
+/* Badge PENDIENTE - Burdeos */
 .badge-pendiente {
-  background: linear-gradient(135deg, #c41e3a, #8B1538);
+  background: #800020;
 }
 
 /* Calificación en estrellas en el panel de detalle */
@@ -1134,19 +1263,20 @@ body {
   padding-top: 1.5rem;
   
   /* Borde superior como separador */
-  border-top: 2px solid #3a3a3a;
+  border-top: 1px solid #262626;
 }
 
 /* Título de la reseña */
 .resena h4 {
-  color: #A01D48;
+  color: #800020;
   margin-bottom: 0.8rem;
+  font-weight: 600;
 }
 
 /* Texto de la reseña */
 .resena p {
-  color: #d0d0d0;
-  line-height: 1.6; /* Interlineado para mejor legibilidad */
+  color: #E0E0E0;
+  line-height: 1.6;
 }
 
 /* ============================================================================
@@ -1158,14 +1288,14 @@ body {
 
 /* Contenedor principal del buscador */
 .buscador-expandible {
-  background: #2a2a2a;
-  border-radius: 15px;
+  background: #1A1A1A;
+  border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  border: 2px solid #8B1538;
+  border: 1px solid #800020;
 }
 
 /* Buscador principal con botón de limpiar */
@@ -1186,12 +1316,12 @@ body {
 
 /* Botón para limpiar la búsqueda (X) */
 .btn-limpiar {
-  /* Posicionamiento absoluto dentro del input */
+  /* Posicionamiento absoluto */
   position: absolute;
   right: 1rem;
   
-  /* Fondo rojo degradado */
-  background: linear-gradient(135deg, #c41e3a, #8B1538);
+  /* Fondo rojo peligro */
+  background: #D32F2F;
   
   /* Texto blanco */
   color: white;
@@ -1215,10 +1345,10 @@ body {
   justify-content: center;
   
   /* Tamaño del símbolo X */
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   
   /* Transiciones suaves */
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   
   /* Texto en negrita */
   font-weight: bold;
@@ -1226,40 +1356,39 @@ body {
 
 /* Efecto hover: cambia color y rota 90 grados */
 .btn-limpiar:hover {
-  background: linear-gradient(135deg, #8B1538, #6B0F28);
+  background: #B71C1C;
   transform: rotate(90deg);
 }
 
 /* Botón para expandir opciones de búsqueda */
 .btn-expandir {
   padding: 0.6rem 1rem;
-  border: 2px solid #8B1538;
-  background: #1a1a1a;
-  color: #A01D48;
+  border: 1px solid #800020;
+  background: #0D0D0D;
+  color: #800020;
   border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   font-weight: 600;
   font-size: 0.9rem;
 }
 
 /* Efecto hover en botón expandir */
 .btn-expandir:hover {
-  background: linear-gradient(135deg, #8B1538, #A01D48);
+  background: #800020;
   color: white;
 }
 
 /* Panel de opciones de búsqueda expandible */
 .opciones-busqueda {
   padding: 1rem;
-  background: #1a1a1a;
-  border-radius: 10px;
+  background: #0D0D0D;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  /* Animación de aparición */
   animation: slideDown 0.3s ease;
-  border: 1px solid #3a3a3a;
+  border: 1px solid #262626;
 }
 
 /* Animación slideDown para opciones de búsqueda */
@@ -1276,7 +1405,7 @@ body {
 
 /* Texto informativo */
 .texto-info {
-  color: #b0b0b0;
+  color: #B0B0B0;
   font-size: 0.9rem;
   line-height: 1.5;
 }
@@ -1286,7 +1415,7 @@ body {
   display: flex;
   gap: 1rem;
   font-size: 0.85rem;
-  color: #888;
+  color: #7A7A7A;
 }
 
 /* ============================================================================
@@ -1297,28 +1426,28 @@ body {
    ✅ REQUISITO: Componente sin props (Footer)
 */
 .footer {
-  /* Fondo degradado burdeos (igual que el header) */
-  background: linear-gradient(135deg, #8B1538 0%, #A01D48 100%);
+  /* Fondo burdeos */
+  background: #800020;
+  
+  /* Borde superior */
+  border-top: 2px solid #A00028;
   
   /* Espaciado interno */
-  padding: 2rem;
+  padding: 1.5rem 2rem;
   
   /* Centrado del texto */
   text-align: center;
   
-  /* Sombra superior con tono burdeos */
-  box-shadow: 0 -4px 20px rgba(139, 21, 56, 0.4);
-  
   /* Separación superior */
-  margin-top: 2rem;
+  margin-top: 3rem;
   
-  /* Color de texto claro */
-  color: #f0f0f0;
+  /* Color de texto blanco */
+  color: #FFFFFF;
   
   /* Tamaño de fuente */
-  font-size: 1rem;
+  font-size: 0.875rem;
   
-  /* Texto en negrita */
+  /* Texto semi-negrita */
   font-weight: 600;
 }
 
@@ -1397,16 +1526,77 @@ body {
   }
 }
 
+/* Tablets pequeñas (max-width: 900px) */
+@media (max-width: 900px) {
+  /* Grid de estadísticas: 2 columnas en lugar de 4 */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  /* Reducir tamaño de números en estadísticas */
+  .stat-numero {
+    font-size: 2.5rem;
+  }
+  
+  /* Ajustar padding de tarjetas de estadísticas */
+  .stat-item {
+    padding: 1.5rem 1rem;
+  }
+  
+  /* Grid de libros: 2 columnas en tablets pequeñas */
+  .lista-libros {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  
+  /* Botones de filtro más compactos */
+  .filtros-estado button {
+    padding: 0.65rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
 /* Móviles pequeños (max-width: 768px) */
 @media (max-width: 768px) {
   /* Grid de estadísticas: 2 columnas en lugar de 4 */
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  
+  /* Reducir más el tamaño en móviles */
+  .stat-numero {
+    font-size: 2rem;
+  }
+  
+  .stat-label {
+    font-size: 0.7rem;
+  }
+  
+  .stat-item {
+    padding: 1.25rem 0.75rem;
+    gap: 0.5rem;
   }
 
   /* Grid de libros: 1 columna en móviles */
   .lista-libros {
     grid-template-columns: 1fr;
+  }
+  
+  /* Ajustar padding de filtros en móvil */
+  .filtros {
+    padding: 1.25rem;
+  }
+  
+  /* Botones de filtro en columna en móviles muy pequeños */
+  .filtros-estado {
+    gap: 0.5rem;
+  }
+  
+  .filtros-estado button {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
   }
 
   /* Sidebars ocupan todo el ancho en móviles pequeños */

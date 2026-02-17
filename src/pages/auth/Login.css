@@ -1,0 +1,129 @@
+/* Usa estilos compartidos de auth */
+.auth-page,
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0D0D0D;
+  padding: 2rem;
+}
+
+.auth-container,
+.login-container {
+  background: #1A1A1A;
+  border-radius: 8px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.9);
+  border: 1px solid #800020;
+}
+
+.auth-header,
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-header h1,
+.login-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.auth-header p,
+.login-header p {
+  color: #B0B0B0;
+  font-size: 0.95rem;
+}
+
+.auth-footer,
+.login-footer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.auth-footer p,
+.login-footer p {
+  margin: 0.5rem 0;
+  color: #B0B0B0;
+}
+
+.auth-footer a,
+.login-footer a {
+  color: #A00028;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.auth-footer a:hover,
+.login-footer a:hover {
+  color: #C00030;
+  text-decoration: underline;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.btn-login {
+  padding: 0.75rem;
+  background: #800020;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.btn-login:hover:not(:disabled) {
+  background: #A00028;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(128, 0, 32, 0.5);
+}
+
+.btn-login:disabled {
+  background: #262626;
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.demo-credentials {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #0D0D0D;
+  border: 1px solid #262626;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.demo-credentials p {
+  margin: 0.3rem 0;
+  color: #B0B0B0;
+}
+
+.demo-credentials strong {
+  color: #FFFFFF;
+}
+
+@media (max-width: 480px) {
+  .auth-container,
+  .login-container {
+    padding: 2rem;
+  }
+
+  .auth-header h1,
+  .login-header h1 {
+    font-size: 2rem;
+  }
+}

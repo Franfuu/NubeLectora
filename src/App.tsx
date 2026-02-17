@@ -1,88 +1,74 @@
-import { useState } from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import FormularioLibro from "./components/FormularioLibro";
-import ListaLibros from "./components/ListaLibros";
-import DetalleLibro from "./components/DetalleLibro";
-import Filtros from "./components/Filtros";
-import Estadisticas from "./components/Estadisticas";
-import { librosIniciales } from "./data/libros";
-import type { Libro } from "./types/libro";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './auth/authContext';
+import PrivateRoute from './routing/PrivateRoute';
+import Home from './pages/home/Home';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import LibrosPage from './pages/books/LibrosPage';
+import AgregarLibroPage from './pages/books/AgregarLibroPage';
+import EstadisticasPage from './pages/stats/EstadisticasPage';
+import DetalleLibroPage from './pages/books/DetalleLibroPage';
+import EditarLibroPage from './pages/books/EditarLibroPage';
+import NotFound from './pages/errors/NotFound';
 import "./App.css";
 
 function App() {
-  const [libros, setLibros] = useState<Libro[]>(librosIniciales);
-
-  const [libroSeleccionado, setLibroSeleccionado] = useState<Libro | null>(
-    null,
-  );
-
-  const [filtroEstado, setFiltroEstado] = useState<string>("todos");
-
-  const [busqueda, setBusqueda] = useState("");
-
-  const agregarLibro = (nuevoLibro: Omit<Libro, "id">) => {
-    const id = Math.max(...libros.map((l) => l.id)) + 1;
-    setLibros([...libros, { ...nuevoLibro, id }]);
-  };
-
-  const eliminarLibro = (id: number) => {
-    setLibros(libros.filter((libro) => libro.id !== id));
-    if (libroSeleccionado?.id === id) {
-      setLibroSeleccionado(null);
-    }
-  };
-
-  const seleccionarLibro = (id: number) => {
-    const libro = libros.find((l) => l.id === id);
-    setLibroSeleccionado(libro || null);
-  };
-
-  const librosFiltrados = libros.filter((libro) => {
-    const cumpleFiltroEstado =
-      filtroEstado === "todos" || libro.estado === filtroEstado;
-    const cumpleBusqueda =
-      libro.titulo.toLowerCase().includes(busqueda.toLowerCase()) ||
-      libro.autor.toLowerCase().includes(busqueda.toLowerCase());
-
-    return cumpleFiltroEstado && cumpleBusqueda;
-  });
-
   return (
-    <div className="app">
-      <Header />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Rutas públicas */}
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-      <div className="container">
-        <aside className="sidebar-formulario">
-          <h2>Agregar Libro</h2>
-
-          <FormularioLibro onAgregarLibro={agregarLibro} />
-        </aside>
-
-        <main className="main-content">
-          <Estadisticas libros={libros} />
-          <Filtros onFiltrarEstado={setFiltroEstado} onBuscar={setBusqueda} />
-          <ListaLibros
-            libros={librosFiltrados}
-            onSelectLibro={seleccionarLibro}
-            onDeleteLibro={eliminarLibro}
+          {/* Rutas privadas (requieren autenticación) */}
+          <Route
+            path="/libros"
+            element={
+              <PrivateRoute>
+                <LibrosPage />
+              </PrivateRoute>
+            }
           />
-        </main>
-        <aside
-          className={`detalle-libro-panel ${libroSeleccionado ? "show" : "empty"}`}
-        >
-          {libroSeleccionado ? (
-            <DetalleLibro
-              libro={libroSeleccionado}
-              onClose={() => setLibroSeleccionado(null)}
-            />
-          ) : (
-            <p>Selecciona un libro para ver sus detalles</p>
-          )}
-        </aside>
-      </div>
-      <Footer />
-    </div>
+          <Route
+            path="/agregar-libro"
+            element={
+              <PrivateRoute>
+                <AgregarLibroPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/estadisticas"
+            element={
+              <PrivateRoute>
+                <EstadisticasPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/libros/:id"
+            element={
+              <PrivateRoute>
+                <DetalleLibroPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/libros/:id/editar"
+            element={
+              <PrivateRoute>
+                <EditarLibroPage />
+              </PrivateRoute>
+            }
+          />
+
+          {/* Ruta 404 - debe estar al final */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
